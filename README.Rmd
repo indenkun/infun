@@ -99,7 +99,7 @@ age.cal(from = c("2000/1/1", "2010/1/1"), to = "2021/4/1")
 
 ### `tableone.overall.rename()`
 
-This function is used to change the "Overall" character in the item name of a table created with `{tableone}`'s `{CreateTableOne()}` to any character.
+This function is used to change the "Overall" character in the item name of a table created with `{tableone}`'s `CreateTableOne()` to any character.
 
 ```{r}
 library(tableone)

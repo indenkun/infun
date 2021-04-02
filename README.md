@@ -118,8 +118,8 @@ a specified sample size between a specified date and a date.
 
 ``` r
 random.Date(from = "2021/1/1", to = "2021/4/1", size = 10)
-#>  [1] "2021-03-13" "2021-01-05" "2021-01-26" "2021-02-19" "2021-03-30"
-#>  [6] "2021-01-02" "2021-03-06" "2021-03-29" "2021-02-11" "2021-02-23"
+#>  [1] "2021-02-08" "2021-02-20" "2021-01-08" "2021-01-21" "2021-03-06"
+#>  [6] "2021-03-25" "2021-03-12" "2021-03-22" "2021-01-01" "2021-03-01"
 ```
 
 ### `age.cal()`
@@ -135,7 +135,7 @@ age.cal(from = c("2000/1/1", "2010/1/1"), to = "2021/4/1")
 ### `tableone.overall.rename()`
 
 This function is used to change the “Overall” character in the item name
-of a table created with `{tableone}`’s `{CreateTableOne()}` to any
+of a table created with `{tableone}`’s `CreateTableOne()` to any
 character.
 
 ``` r
