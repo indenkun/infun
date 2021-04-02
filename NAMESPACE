@@ -3,6 +3,7 @@
 export(add.str)
 export(age.cal)
 export(find.not.numeric.value)
+export(find.same.value.col)
 export(random.Date)
-export(same.value.col)
+export(seq_geometric)
 export(tableone.overall.rename)

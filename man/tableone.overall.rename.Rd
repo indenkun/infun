@@ -13,12 +13,6 @@ tableone.overall.rename(x, rename.str)
 }
 \value{
 An object of class \code{TableOne}, which is a list of three objects.
-
-\item{ContTable}{object of class \code{ContTable}, containing continuous variables only}
-
-\item{CatTable}{object of class \code{CatTable}, containing categorical variables only}
-
-\item{MetaData}{list of metadata regarding variables}
 }
 \description{
 This function is used to change the "Overall" character in the item name of a table created with \code{\link[tableone]{CreateTableOne}} to any character.

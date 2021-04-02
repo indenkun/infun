@@ -53,7 +53,7 @@ find.not.numeric.value(example.data$value2)
 #> [1] 4
 ```
 
-### `same.value.col()`
+### `find.same.value.col()`
 
 This function is used to find a column consisting of the same value in a
 data frame.
@@ -64,7 +64,7 @@ second and third columns of the sample data all have the same value.
 The result is returned in a list format.
 
 ``` r
-same.value.col(example.data)
+find.same.value.col(example.data)
 #> [[1]]
 #> NULL
 #> 
@@ -118,8 +118,8 @@ a specified sample size between a specified date and a date.
 
 ``` r
 random.Date(from = "2021/1/1", to = "2021/4/1", size = 10)
-#>  [1] "2021-02-08" "2021-02-20" "2021-01-08" "2021-01-21" "2021-03-06"
-#>  [6] "2021-03-25" "2021-03-12" "2021-03-22" "2021-01-01" "2021-03-01"
+#>  [1] "2021-01-02" "2021-02-18" "2021-01-31" "2021-03-14" "2021-02-14"
+#>  [6] "2021-03-10" "2021-01-09" "2021-01-14" "2021-03-09" "2021-02-20"
 ```
 
 ### `age.cal()`
@@ -168,6 +168,21 @@ tableone.overall.rename(iris.table, rename.str = "ALL")
 #>      setosa                  50 (33.3) 
 #>      versicolor              50 (33.3) 
 #>      virginica               50 (33.3)
+```
+
+## `seq_geometric()`
+
+This function is used to generate a sequence of equal ratios, also known
+as a geometric sequence.
+
+By specifying the first term in `from`, the last term or the closest
+value to the last term in `to`, and the common ratio in `by.rate`, you
+can obtain an geometric sequence of “first term \* common ratio ^ n”
+from “from” to the closest value to “to”.
+
+``` r
+seq_geometric(from = 1, to = 128, by.ratio = 2)
+#> [1]   1   2   4   8  16  32  64 128
 ```
 
 ## Imports packages

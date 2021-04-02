@@ -8,7 +8,7 @@
 #' @return a list.
 #' @export
 
-same.value.col <- function(data, col.name = c("number", "name")){
+find.same.value.col <- function(data, col.name = c("number", "name")){
   col.name = match.arg(col.name)
 
   if(!is.data.frame(data)){

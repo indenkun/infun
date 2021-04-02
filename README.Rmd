@@ -57,7 +57,7 @@ find.not.numeric.value(example.data$value1)
 find.not.numeric.value(example.data$value2)
 ```
 
-### `same.value.col()`
+### `find.same.value.col()`
 
 This function is used to find a column consisting of the same value in a data frame.
 
@@ -66,7 +66,7 @@ If you run `same.value.col()` on `example.data`, you will see that the second an
 The result is returned in a list format.
 
 ```{r}
-same.value.col(example.data)
+find.same.value.col(example.data)
 ```
 
 ### `add.str()`
@@ -109,6 +109,16 @@ iris.table
 
 # Rename "Overall" to "ALL".
 tableone.overall.rename(iris.table, rename.str = "ALL")
+```
+
+## `seq_geometric()`
+
+This function is used to generate a sequence of equal ratios, also known as a geometric sequence.
+
+By specifying the first term in `from`, the last term or the closest value to the last term in `to`, and the common ratio in `by.rate`, you can obtain an geometric sequence of "first term * common ratio ^ n" from "from" to the closest value to "to".
+
+```{r}
+seq_geometric(from = 1, to = 128, by.ratio = 2)
 ```
 
 ## Imports packages
