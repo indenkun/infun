@@ -1,7 +1,9 @@
 #' List of pacman packages in Rtools
 #' @description
 #' These are functions to search for packages that can be installed by Rtools' pacman. In short, it is a wrapper for some of the functions of pacman in Rtools.
+#'
 #' \code{Rtools.pacman.package.list()} is a function that outputs a list of packages that can be installed by Rtools pacman from repository. By specifying arguments, you can extract only those packages that are already installed, or only those that are yet uninstalled.
+#'
 #' \code{Rtools.pacman.package.find()} is a function that displays a list of packages that can be installed by pacman in Rtools from repository with the specified arguments in the string. If no matching package is found, return NA.
 #'
 #' @param package.list Select whether to show all packages, only installed packages, or only packages that have not yet been uninstalled.
@@ -9,7 +11,9 @@
 #'
 #' @details
 #' Cannot be used except in a Windows environment where Rtools40 or later is installed.
+#'
 #' \code{Rtools.pacman.package.list()} will pass \code{pacman -Sl} to \code{\link[base]{shell}} to receive and output the result.
+#'
 #' \code{Rtools.pacman.package.find()} binds \code{pacman -Ss} and the input value with \code{\link[base]{paste}}, and passes it to \code{\link[base]{shell}} to receive the result and output it.
 #'
 #' @return

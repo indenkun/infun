@@ -34,6 +34,7 @@ A vector of class "Date".
 }
 \description{
 \code{random.Date()} is a function that randomly creates a vector of dates at a specified sample size between a specified date and a date.
+
 \code{age.cal()} is a function that calculates the number of years (age by default), months, and days from a specified date to a specified date.
 }
 \seealso{

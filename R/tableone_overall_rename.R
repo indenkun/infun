@@ -11,6 +11,11 @@
 #' @export
 
 tableone.overall.rename <- function(x, rename.str){
+  if(length(rename.str) != 1){
+    warning("'rename.str' must be of length 1")
+    return(NA)
+  }
+
   if(class(x) != "TableOne"){
     warning("The class is not TableOne, so it cannot be handled.")
   }else{
