@@ -33,3 +33,6 @@ seq_geometric(1, 10, 2, length.out = 3)
 seq_geometric(1, 0.001, 0.1)
 seq_geometric(1, 0.001, 0.1, length.out = 3)
 }
+\seealso{
+\code{\link[base]{seq}}
+}

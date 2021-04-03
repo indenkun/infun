@@ -20,6 +20,8 @@ knitr::opts_chunk$set(
 
 This is a collection of R utilities functions for me, but maybe also for you.
 
+Functions may be added, specifications of functions may change or become obsolete, and names may change without notice.
+
 ## Installation
 
 install the development version install from GitHub:
@@ -71,7 +73,7 @@ find.same.value.col(example.data)
 
 ### `add.str()`
 
-Combine all the items in a specific column of a data frame with any string of characters in the original data frame.
+Combine all the items in a specific column of a data frame with any string of characters in the original data frame. The converted column will be a string because it contains strings such as ALL.
 
 You need to specify any column as `key` with the column name.
 
@@ -119,6 +121,26 @@ By specifying the first term in `from`, the last term or the closest value to th
 
 ```{r}
 seq_geometric(from = 1, to = 128, by.ratio = 2)
+```
+
+## `Rtools.pacman.package.*()`
+
+These are functions to search for packages that can be installed by Rtools' pacman. In short, it is a wrapper for some of the functions of pacman in Rtools.
+
+Cannot be used except in a Windows environment where Rtools40 or later is installed.
+
+`Rtools.pacman.package.list()` is a function that outputs a list of packages that can be installed by Rtools pacman from repository. By specifying arguments, you can extract only those packages that are already installed, or only those that are yet uninstalled.
+
+```{r}
+package.list <- Rtools.pacman.package.list
+# It's too long, so show part of it in head()
+head(package.list)
+```
+
+`Rtools.pacman.package.list()` is a function that displays a list of packages that can be installed by pacman in Rtools from repository with the specified arguments in the string. If no matching package is found, return NA.
+
+```{r}
+Rtools.pacman.package.find("curl")
 ```
 
 ## Imports packages

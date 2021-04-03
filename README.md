@@ -9,6 +9,9 @@
 This is a collection of R utilities functions for me, but maybe also for
 you.
 
+Functions may be added, specifications of functions may change or become
+obsolete, and names may change without notice.
+
 ## Installation
 
 install the development version install from GitHub:
@@ -81,7 +84,8 @@ find.same.value.col(example.data)
 ### `add.str()`
 
 Combine all the items in a specific column of a data frame with any
-string of characters in the original data frame.
+string of characters in the original data frame. The converted column
+will be a string because it contains strings such as ALL.
 
 You need to specify any column as `key` with the column name.
 
@@ -118,8 +122,8 @@ a specified sample size between a specified date and a date.
 
 ``` r
 random.Date(from = "2021/1/1", to = "2021/4/1", size = 10)
-#>  [1] "2021-01-02" "2021-02-18" "2021-01-31" "2021-03-14" "2021-02-14"
-#>  [6] "2021-03-10" "2021-01-09" "2021-01-14" "2021-03-09" "2021-02-20"
+#>  [1] "2021-01-23" "2021-03-04" "2021-01-19" "2021-01-15" "2021-01-02"
+#>  [6] "2021-01-13" "2021-03-21" "2021-03-14" "2021-01-06" "2021-03-19"
 ```
 
 ### `age.cal()`
@@ -183,6 +187,44 @@ from “from” to the closest value to “to”.
 ``` r
 seq_geometric(from = 1, to = 128, by.ratio = 2)
 #> [1]   1   2   4   8  16  32  64 128
+```
+
+## `Rtools.pacman.package.*()`
+
+These are functions to search for packages that can be installed by
+Rtools’ pacman. In short, it is a wrapper for some of the functions of
+pacman in Rtools.
+
+Cannot be used except in a Windows environment where Rtools40 or later
+is installed.
+
+`Rtools.pacman.package.list()` is a function that outputs a list of
+packages that can be installed by Rtools pacman from repository. By
+specifying arguments, you can extract only those packages that are
+already installed, or only those that are yet uninstalled.
+
+``` r
+package.list <- Rtools.pacman.package.list
+# It's too long, so show part of it in head()
+head(package.list)
+#>                                                                  
+#> 1 function (package.list = c("all", "installed", "uninstalled")) 
+#> 2 {                                                              
+#> 3     package.list <- match.arg(package.list)                    
+#> 4     if (.Platform$OS.type != "windows") {                      
+#> 5         warning("This function is for Windows.")               
+#> 6         return(NA)
+```
+
+`Rtools.pacman.package.list()` is a function that displays a list of
+packages that can be installed by pacman in Rtools from repository with
+the specified arguments in the string. If no matching package is found,
+return NA.
+
+``` r
+Rtools.pacman.package.find("curl")
+#> [1] "mingw32/mingw-w64-i686-curl 7.64.1-9202"  
+#> [2] "mingw64/mingw-w64-x86_64-curl 7.64.1-9202"
 ```
 
 ## Imports packages
