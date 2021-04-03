@@ -86,8 +86,10 @@ head(example.data.add.all, 20)
 
 `random.Date()` is a function that randomly creates a vector of dates at a specified sample size between a specified date and a date.
 
-```{r}
+```r
 random.Date(from = "2021/1/1", to = "2021/4/1", size = 10)
+#>  [1] "2021-01-21" "2021-03-17" "2021-03-09" "2021-02-20" "2021-02-24"
+#>  [6] "2021-02-22" "2021-02-06" "2021-03-24" "2021-02-03" "2021-03-11"
 ```
 
 ### `age.cal()`
@@ -132,7 +134,7 @@ Cannot be used except in a Windows environment where Rtools40 or later is instal
 `Rtools.pacman.package.list()` is a function that outputs a list of packages that can be installed by Rtools pacman from repository. By specifying arguments, you can extract only those packages that are already installed, or only those that are yet uninstalled.
 
 ```{r}
-package.list <- Rtools.pacman.package.list
+package.list <- Rtools.pacman.package.list()
 # It's too long, so show part of it in head()
 head(package.list)
 ```

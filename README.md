@@ -122,8 +122,8 @@ a specified sample size between a specified date and a date.
 
 ``` r
 random.Date(from = "2021/1/1", to = "2021/4/1", size = 10)
-#>  [1] "2021-01-23" "2021-03-04" "2021-01-19" "2021-01-15" "2021-01-02"
-#>  [6] "2021-01-13" "2021-03-21" "2021-03-14" "2021-01-06" "2021-03-19"
+#>  [1] "2021-01-21" "2021-03-17" "2021-03-09" "2021-02-20" "2021-02-24"
+#>  [6] "2021-02-22" "2021-02-06" "2021-03-24" "2021-02-03" "2021-03-11"
 ```
 
 ### `age.cal()`
@@ -204,16 +204,15 @@ specifying arguments, you can extract only those packages that are
 already installed, or only those that are yet uninstalled.
 
 ``` r
-package.list <- Rtools.pacman.package.list
+package.list <- Rtools.pacman.package.list()
 # It's too long, so show part of it in head()
 head(package.list)
-#>                                                                  
-#> 1 function (package.list = c("all", "installed", "uninstalled")) 
-#> 2 {                                                              
-#> 3     package.list <- match.arg(package.list)                    
-#> 4     if (.Platform$OS.type != "windows") {                      
-#> 5         warning("This function is for Windows.")               
-#> 6         return(NA)
+#> [1] "mingw32 mingw-w64-i686-aom 2.0.1-1"                  
+#> [2] "mingw32 mingw-w64-i686-argtable 2.13-1"              
+#> [3] "mingw32 mingw-w64-i686-arrow 3.0.0-1"                
+#> [4] "mingw32 mingw-w64-i686-aws-sdk-cpp 1.7.365-1"        
+#> [5] "mingw32 mingw-w64-i686-binutils 2.33.1-1 [installed]"
+#> [6] "mingw32 mingw-w64-i686-boost 1.67.0-9002"
 ```
 
 `Rtools.pacman.package.list()` is a function that displays a list of
@@ -223,8 +222,8 @@ return NA.
 
 ``` r
 Rtools.pacman.package.find("curl")
-#> [1] "mingw32/mingw-w64-i686-curl 7.64.1-9202"  
-#> [2] "mingw64/mingw-w64-x86_64-curl 7.64.1-9202"
+#> [1] "mingw32/mingw-w64-i686-curl 7.64.1-9202 [installed]"  
+#> [2] "mingw64/mingw-w64-x86_64-curl 7.64.1-9202 [installed]"
 ```
 
 ## Imports packages

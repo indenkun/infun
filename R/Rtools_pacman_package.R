@@ -9,6 +9,8 @@
 #'
 #' @details
 #' Cannot be used except in a Windows environment where Rtools40 or later is installed.
+#' \code{Rtools.pacman.package.list()} will pass \code{pacman -Sl} to \code{\link[base]{shell}} to receive and output the result.
+#' \code{Rtools.pacman.package.find()} binds \code{pacman -Ss} and the input value with \code{\link[base]{paste}}, and passes it to \code{\link[base]{shell}} to receive the result and output it.
 #'
 #' @return
 #' a Vector of package names.
@@ -40,7 +42,8 @@ Rtools.pacman.package.list <- function(package.list = c("all", "installed", "uni
 #' @rdname Rtools.pacman.package
 #' @export
 
-Rtools.pacman.package.find <- function(x){
+Rtools.pacman.package.find <- function(x, package.list = c("all", "installed", "uninstalled")){
+  package.list <- match.arg(package.list)
 
   if(.Platform$OS.type != "windows"){
     warning("This function is for Windows.")
@@ -64,7 +67,16 @@ Rtools.pacman.package.find <- function(x){
       warning("It seems that the appropriate package was not found.")
       return(NA)
     }else{
-      pacman.packages.list[1:length(pacman.packages.list) %% 2 != 0]
+      pacman.packages.list <- pacman.packages.list[1:length(pacman.packages.list) %% 2 != 0]
+      pacman.packages.list <- if(package.list == "all") pacman.packages.list
+      else if(package.list == "installed") pacman.packages.list[grep("installed", pacman.packages.list)]
+      else if(package.list == "uninstalled") pacman.packages.list[-grep("installed", pacman.packages.list)]
+      if(length(pacman.packages.list) == 0){
+        warning("It seems that the appropriate package was not found.")
+        return(NA)
+      }else{
+        pacman.packages.list
+      }
     }
   }
 }

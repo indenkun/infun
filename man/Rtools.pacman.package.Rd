@@ -7,7 +7,10 @@
 \usage{
 Rtools.pacman.package.list(package.list = c("all", "installed", "uninstalled"))
 
-Rtools.pacman.package.find(x)
+Rtools.pacman.package.find(
+  x,
+  package.list = c("all", "installed", "uninstalled")
+)
 }
 \arguments{
 \item{package.list}{Select whether to show all packages, only installed packages, or only packages that have not yet been uninstalled.}
@@ -24,4 +27,6 @@ These are functions to search for packages that can be installed by Rtools' pacm
 }
 \details{
 Cannot be used except in a Windows environment where Rtools40 or later is installed.
+\code{Rtools.pacman.package.list()} will pass \code{pacman -Sl} to \code{\link[base]{shell}} to receive and output the result.
+\code{Rtools.pacman.package.find()} binds \code{pacman -Ss} and the input value with \code{\link[base]{paste}}, and passes it to \code{\link[base]{shell}} to receive the result and output it.
 }
