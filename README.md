@@ -234,7 +234,7 @@ values in the data frame will remain unchanged.
 
 In short, it is a generic function of `{base}` `cale()`.
 
-It is a generic function of `scale()`, so call it with scale when
+It is a generic function of `scale()`, so call it with `scale()` when
 `{infun}` library is loaded. If the object is a data frame, this will
 work by itself.
 
