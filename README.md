@@ -174,7 +174,7 @@ tableone.overall.rename(iris.table, rename.str = "ALL")
 #>      virginica               50 (33.3)
 ```
 
-## `seq_geometric()`
+### `seq_geometric()`
 
 This function is used to generate a sequence of equal ratios, also known
 as a geometric sequence.
@@ -189,7 +189,7 @@ seq_geometric(from = 1, to = 128, by.ratio = 2)
 #> [1]   1   2   4   8  16  32  64 128
 ```
 
-## `Rtools.pacman.package.*()`
+### `Rtools.pacman.package.*()`
 
 These are functions to search for packages that can be installed by
 Rtools’ pacman. In short, it is a wrapper for some of the functions of
@@ -226,7 +226,7 @@ Rtools.pacman.package.find("curl")
 #> [2] "mingw64/mingw-w64-x86_64-curl 7.64.1-9202 [installed]"
 ```
 
-## `scale.data.frame()`
+### `scale.data.frame()`
 
 `scale.data.frame()` is generic function whose default method centers
 and/or scales the columns of a numeric in data frame. The non-numeric

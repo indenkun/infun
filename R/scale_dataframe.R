@@ -18,7 +18,7 @@
 #' @export
 
 scale.data.frame <- function(x, center = TRUE, scale = TRUE){
-  if(class(x) != "data.frame"){
+  if(all(class(x) != "data.frame")){
     warning("Only one data frames can be handled.")
     return(NA)
   }
