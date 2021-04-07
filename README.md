@@ -240,6 +240,9 @@ work by itself.
 
 If you want to call it explicitly, use `infun:::scale.data.frame()`.
 
+If you want to explicitly use the `{base}` `scale()` after loading
+`{infun}` as a library, you can use it in `scale.default()`.
+
 ``` r
 z.iris <- scale(iris)
 # It's too long, so show part of it in head()
