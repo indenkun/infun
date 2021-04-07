@@ -226,6 +226,33 @@ Rtools.pacman.package.find("curl")
 #> [2] "mingw64/mingw-w64-x86_64-curl 7.64.1-9202 [installed]"
 ```
 
+## `scale.data.frame()`
+
+`scale.data.frame()` is generic function whose default method centers
+and/or scales the columns of a numeric in data frame. The non-numeric
+values in the data frame will remain unchanged.
+
+In short, it is a generic function of `{base}` `cale()`.
+
+It is a generic function of `scale()`, so call it with scale when
+`{infun}` library is loaded. If the object is a data frame, this will
+work by itself.
+
+If you want to call it explicitly, use `infun:::scale.data.frame()`.
+
+``` r
+z.iris <- scale(iris)
+# It's too long, so show part of it in head()
+head(z.iris)
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#> 1   -0.8976739  1.01560199    -1.335752   -1.311052  setosa
+#> 2   -1.1392005 -0.13153881    -1.335752   -1.311052  setosa
+#> 3   -1.3807271  0.32731751    -1.392399   -1.311052  setosa
+#> 4   -1.5014904  0.09788935    -1.279104   -1.311052  setosa
+#> 5   -1.0184372  1.24503015    -1.335752   -1.311052  setosa
+#> 6   -0.5353840  1.93331463    -1.165809   -1.048667  setosa
+```
+
 ## Imports packages
 
 -   `{purrr}`
