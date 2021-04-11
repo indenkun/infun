@@ -256,14 +256,45 @@ head(z.iris)
 #> 6   -0.5353840  1.93331463    -1.165809   -1.048667  setosa
 ```
 
+### `save_gtsummary()`
+
+This function is used to output the table created by the gtsummary
+package in PowerPoint or Word, or as an image file. It just wraps
+`{gtsummary}`’s `as_flex_table()` and `{flextalbe}`’s `save_as*()`
+functions.
+
+Supported filename extensions: .pptx, .docx, .png, .pdf, .jpg.
+
+``` r
+library(gtsummary)
+library(tidyverse)
+
+# Sample code for gtsummary
+tbl_summary_ex1 <-
+  trial %>%
+  select(age, grade, response) %>%
+  tbl_summary()
+  
+# Output the table created by gtsummary to PowerPoint(.pptx).
+tbl_summary_ex1 %>% 
+  save_gtsummary(path = "table.pptx")
+```
+
 ## Imports packages
 
 -   `{purrr}`
 
 ## Suggests packages
 
--   `{tableone}`
+-   `{gtsummary}`
+-   `{flextable}`
+-   `{tools}`
 
 ## License
 
 MIT.
+
+## Notice
+
+-   The email address listed in the DESCRIPTION is a dummy. If you have
+    any questions, please post them on ISSUE.
