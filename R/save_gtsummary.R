@@ -22,6 +22,8 @@ save_gtsummary <- function(x, path, values = NULL, pr_section = NULL, zoom = 3, 
   if(!requireNamespace("flextable", quietly = TRUE)) stop("This function will not work unless the `{flextable}` package is installed")
   if(!requireNamespace("tools", quietly = TRUE)) stop("This function will not work unless the `{tools}` package is installed")
 
+  if(length(path) != 1) stop("Please specify only one output path.")
+
   extension_types <- c("docx", "pptx", "png", "pdf", "jpg")
 
   file_type <- tools::file_ext(path)
