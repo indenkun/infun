@@ -136,13 +136,17 @@ age.cal(from = c("2000/1/1", "2010/1/1"), to = "2021/4/1")
 #> [1] 21 11
 ```
 
-### `tableone.overall.rename()`
+### `tableone.rename.*()`
 
-This function is used to change the “Overall” character in the item name
-of a table created with `{tableone}`’s `CreateTableOne()` to any
-character.
+These functions are used to change the headline character in the item
+name of a table created with `{tableone}`’s to any character.
+
+`tableone.rename.overall()` is used to change the “Overall” character in
+the item name of a table created with `{tableone}`’s `CreateTableOne()`
+to any character.
 
 ``` r
+# This is the code to create a sample table in `{tableone}`.
 library(tableone)
 
 iris.table <- CreateTableOne(data = iris)
@@ -172,6 +176,154 @@ tableone.rename.overall(iris.table, rename.str = "ALL")
 #>      setosa                  50 (33.3) 
 #>      versicolor              50 (33.3) 
 #>      virginica               50 (33.3)
+```
+
+`tableone.rename.headline()` is a function that change any heading
+(including Overall) to any character by setting the table heading as an
+formula before and after the change.
+
+``` r
+# This is the code to create a sample table in `{tableone}`.
+library(tableone)
+library(survival)
+data(pbc)
+
+varsToFactor <- c("status","trt","ascites","hepato","spiders","edema","stage")
+pbc[varsToFactor] <- lapply(pbc[varsToFactor], factor)
+vars <- c("time","status","age","sex","ascites","hepato",
+          "spiders","edema","bili","chol","albumin",
+          "copper","alk.phos","ast","trig","platelet",
+          "protime","stage")
+tableOne <- CreateTableOne(vars = vars, strata = c("trt"), data = pbc, addOverall = TRUE)
+tableOne
+#>                       Stratified by trt
+#>                        Overall           1                 2                
+#>   n                        418               158               154          
+#>   time (mean (SD))     1917.78 (1104.67) 2015.62 (1094.12) 1996.86 (1155.93)
+#>   status (%)                                                                
+#>      0                     232 (55.5)         83 (52.5)         85 (55.2)   
+#>      1                      25 ( 6.0)         10 ( 6.3)          9 ( 5.8)   
+#>      2                     161 (38.5)         65 (41.1)         60 (39.0)   
+#>   age (mean (SD))        50.74 (10.45)     51.42 (11.01)     48.58 (9.96)   
+#>   sex = f (%)              374 (89.5)        137 (86.7)        139 (90.3)   
+#>   ascites = 1 (%)           24 ( 7.7)         14 ( 8.9)         10 ( 6.5)   
+#>   hepato = 1 (%)           160 (51.3)         73 (46.2)         87 (56.5)   
+#>   spiders = 1 (%)           90 (28.8)         45 (28.5)         45 (29.2)   
+#>   edema (%)                                                                 
+#>      0                     354 (84.7)        132 (83.5)        131 (85.1)   
+#>      0.5                    44 (10.5)         16 (10.1)         13 ( 8.4)   
+#>      1                      20 ( 4.8)         10 ( 6.3)         10 ( 6.5)   
+#>   bili (mean (SD))        3.22 (4.41)       2.87 (3.63)       3.65 (5.28)   
+#>   chol (mean (SD))      369.51 (231.94)   365.01 (209.54)   373.88 (252.48) 
+#>   albumin (mean (SD))     3.50 (0.42)       3.52 (0.44)       3.52 (0.40)   
+#>   copper (mean (SD))     97.65 (85.61)     97.64 (90.59)     97.65 (80.49)  
+#>   alk.phos (mean (SD)) 1982.66 (2140.39) 2021.30 (2183.44) 1943.01 (2101.69)
+#>   ast (mean (SD))       122.56 (56.70)    120.21 (54.52)    124.97 (58.93)  
+#>   trig (mean (SD))      124.70 (65.15)    124.14 (71.54)    125.25 (58.52)  
+#>   platelet (mean (SD))  257.02 (98.33)    258.75 (100.32)   265.20 (90.73)  
+#>   protime (mean (SD))    10.73 (1.02)      10.65 (0.85)      10.80 (1.14)   
+#>   stage (%)                                                                 
+#>      1                      21 ( 5.1)         12 ( 7.6)          4 ( 2.6)   
+#>      2                      92 (22.3)         35 (22.2)         32 (20.8)   
+#>      3                     155 (37.6)         56 (35.4)         64 (41.6)   
+#>      4                     144 (35.0)         55 (34.8)         54 (35.1)   
+#>                       Stratified by trt
+#>                        p      test
+#>   n                               
+#>   time (mean (SD))      0.883     
+#>   status (%)            0.894     
+#>      0                            
+#>      1                            
+#>      2                            
+#>   age (mean (SD))       0.018     
+#>   sex = f (%)           0.421     
+#>   ascites = 1 (%)       0.567     
+#>   hepato = 1 (%)        0.088     
+#>   spiders = 1 (%)       0.985     
+#>   edema (%)             0.877     
+#>      0                            
+#>      0.5                          
+#>      1                            
+#>   bili (mean (SD))      0.131     
+#>   chol (mean (SD))      0.748     
+#>   albumin (mean (SD))   0.874     
+#>   copper (mean (SD))    0.999     
+#>   alk.phos (mean (SD))  0.747     
+#>   ast (mean (SD))       0.460     
+#>   trig (mean (SD))      0.886     
+#>   platelet (mean (SD))  0.555     
+#>   protime (mean (SD))   0.197     
+#>   stage (%)             0.201     
+#>      1                            
+#>      2                            
+#>      3                            
+#>      4
+
+# Rename headline name "1" to "D-penicillmain", "2" to "placebo".
+# Names that contain hyphens will be evaluated as negative in the formula, so they must be enclosed in quotation marks.
+tableone.rename.headline(tableOne, rename.headline = list(1 ~ "D-penicillmain", 2 ~ placebo))
+#>                       Stratified by trt
+#>                        Overall           D-penicillmain    placebo          
+#>   n                        418               158               154          
+#>   time (mean (SD))     1917.78 (1104.67) 2015.62 (1094.12) 1996.86 (1155.93)
+#>   status (%)                                                                
+#>      0                     232 (55.5)         83 (52.5)         85 (55.2)   
+#>      1                      25 ( 6.0)         10 ( 6.3)          9 ( 5.8)   
+#>      2                     161 (38.5)         65 (41.1)         60 (39.0)   
+#>   age (mean (SD))        50.74 (10.45)     51.42 (11.01)     48.58 (9.96)   
+#>   sex = f (%)              374 (89.5)        137 (86.7)        139 (90.3)   
+#>   ascites = 1 (%)           24 ( 7.7)         14 ( 8.9)         10 ( 6.5)   
+#>   hepato = 1 (%)           160 (51.3)         73 (46.2)         87 (56.5)   
+#>   spiders = 1 (%)           90 (28.8)         45 (28.5)         45 (29.2)   
+#>   edema (%)                                                                 
+#>      0                     354 (84.7)        132 (83.5)        131 (85.1)   
+#>      0.5                    44 (10.5)         16 (10.1)         13 ( 8.4)   
+#>      1                      20 ( 4.8)         10 ( 6.3)         10 ( 6.5)   
+#>   bili (mean (SD))        3.22 (4.41)       2.87 (3.63)       3.65 (5.28)   
+#>   chol (mean (SD))      369.51 (231.94)   365.01 (209.54)   373.88 (252.48) 
+#>   albumin (mean (SD))     3.50 (0.42)       3.52 (0.44)       3.52 (0.40)   
+#>   copper (mean (SD))     97.65 (85.61)     97.64 (90.59)     97.65 (80.49)  
+#>   alk.phos (mean (SD)) 1982.66 (2140.39) 2021.30 (2183.44) 1943.01 (2101.69)
+#>   ast (mean (SD))       122.56 (56.70)    120.21 (54.52)    124.97 (58.93)  
+#>   trig (mean (SD))      124.70 (65.15)    124.14 (71.54)    125.25 (58.52)  
+#>   platelet (mean (SD))  257.02 (98.33)    258.75 (100.32)   265.20 (90.73)  
+#>   protime (mean (SD))    10.73 (1.02)      10.65 (0.85)      10.80 (1.14)   
+#>   stage (%)                                                                 
+#>      1                      21 ( 5.1)         12 ( 7.6)          4 ( 2.6)   
+#>      2                      92 (22.3)         35 (22.2)         32 (20.8)   
+#>      3                     155 (37.6)         56 (35.4)         64 (41.6)   
+#>      4                     144 (35.0)         55 (34.8)         54 (35.1)   
+#>                       Stratified by trt
+#>                        p      test
+#>   n                               
+#>   time (mean (SD))      0.883     
+#>   status (%)            0.894     
+#>      0                            
+#>      1                            
+#>      2                            
+#>   age (mean (SD))       0.018     
+#>   sex = f (%)           0.421     
+#>   ascites = 1 (%)       0.567     
+#>   hepato = 1 (%)        0.088     
+#>   spiders = 1 (%)       0.985     
+#>   edema (%)             0.877     
+#>      0                            
+#>      0.5                          
+#>      1                            
+#>   bili (mean (SD))      0.131     
+#>   chol (mean (SD))      0.748     
+#>   albumin (mean (SD))   0.874     
+#>   copper (mean (SD))    0.999     
+#>   alk.phos (mean (SD))  0.747     
+#>   ast (mean (SD))       0.460     
+#>   trig (mean (SD))      0.886     
+#>   platelet (mean (SD))  0.555     
+#>   protime (mean (SD))   0.197     
+#>   stage (%)             0.201     
+#>      1                            
+#>      2                            
+#>      3                            
+#>      4
 ```
 
 ### `seq_geometric()`

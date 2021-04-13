@@ -101,11 +101,14 @@ age.cal(from = c("2000/1/1", "2010/1/1"), to = "2021/4/1")
 ```
 
 
-### `tableone.overall.rename()`
+### `tableone.rename.*()`
 
-This function is used to change the "Overall" character in the item name of a table created with `{tableone}`'s `CreateTableOne()` to any character.
+These functions are used to change the headline character in the item name of a table created with `{tableone}`'s to any character.
+
+`tableone.rename.overall()` is used to change the "Overall" character in the item name of a table created with `{tableone}`'s `CreateTableOne()` to any character.
 
 ```{r}
+# This is the code to create a sample table in `{tableone}`.
 library(tableone)
 
 iris.table <- CreateTableOne(data = iris)
@@ -114,6 +117,30 @@ iris.table
 # Rename "Overall" to "ALL".
 tableone.rename.overall(iris.table, rename.str = "ALL")
 ```
+
+`tableone.rename.headline()` is a function that change any heading (including Overall) to any character by setting the table heading as an formula before and after the change.
+
+```{r}
+# This is the code to create a sample table in `{tableone}`.
+library(tableone)
+library(survival)
+data(pbc)
+
+varsToFactor <- c("status","trt","ascites","hepato","spiders","edema","stage")
+pbc[varsToFactor] <- lapply(pbc[varsToFactor], factor)
+vars <- c("time","status","age","sex","ascites","hepato",
+          "spiders","edema","bili","chol","albumin",
+          "copper","alk.phos","ast","trig","platelet",
+          "protime","stage")
+tableOne <- CreateTableOne(vars = vars, strata = c("trt"), data = pbc, addOverall = TRUE)
+tableOne
+
+# Rename headline name "1" to "D-penicillmain", "2" to "placebo".
+# Names that contain hyphens will be evaluated as negative in the formula, so they must be enclosed in quotation marks.
+tableone.rename.headline(tableOne, rename.headline = list(1 ~ "D-penicillmain", 2 ~ placebo))
+
+```
+
 
 ### `seq_geometric()`
 
