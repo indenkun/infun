@@ -11,7 +11,7 @@
 #' @seealso
 #' \code{\link[tableone]{CreateTableOne}}, \code{\link[tableone]{print.TableOne}}, \code{\link[tableone]{summary.TableOne}}
 #'
-#' @rdname tableone.rename
+#' @rdname tableone.rename.headline
 #'
 #' @export
 
@@ -38,7 +38,7 @@ tableone.rename.overall <- function(x, rename.str){
 #' @param rename.headline Enter the name of the heading to be changed in formula form.
 #' If you want to change more than one heading, combine the formulas into a list format.
 #' Names that contain hyphens will be evaluated as negative in the formula, so they must be enclosed in quotation marks.
-#' @rdname tableone.rename
+#' @rdname tableone.rename.headline
 #'
 #' @export
 
