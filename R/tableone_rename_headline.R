@@ -10,7 +10,7 @@
 #'
 #' @export
 
-tableone.overall.rename <- function(x, rename.str){
+tableone.rename.overall <- function(x, rename.str){
   if(length(rename.str) != 1){
     warning("'rename.str' must be of length 1")
     return(NA)

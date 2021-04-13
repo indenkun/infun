@@ -160,7 +160,7 @@ iris.table
 #>      virginica               50 (33.3)
 
 # Rename "Overall" to "ALL".
-tableone.overall.rename(iris.table, rename.str = "ALL")
+tableone.rename.overall(iris.table, rename.str = "ALL")
 #>                           
 #>                            ALL         
 #>   n                         150        

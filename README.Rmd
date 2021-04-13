@@ -112,7 +112,7 @@ iris.table <- CreateTableOne(data = iris)
 iris.table
 
 # Rename "Overall" to "ALL".
-tableone.overall.rename(iris.table, rename.str = "ALL")
+tableone.rename.overall(iris.table, rename.str = "ALL")
 ```
 
 ### `seq_geometric()`
