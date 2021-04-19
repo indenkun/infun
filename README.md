@@ -432,6 +432,30 @@ tbl_summary_ex1 %>%
   save_gtsummary(path = "table.pptx")
 ```
 
+### `round_any()`
+
+This function is used to round a vector made of numbers to an
+approximation of a sequence of numbers with arbitrary equidifferences.
+
+If the value matches an arbitrary isoperimetric sequence, the value will
+be output as is.
+
+If the `type` argument is `ceiling`, it will round to the upper side of
+the nearest value, and if the `type` argument is `floor`, it will round
+to the lower side.
+
+``` r
+example.vector <- seq(0, 1, 0.1)
+example.vector
+#>  [1] 0.0 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0
+
+round_any(example.vector, by = 0.25, type = "ceiling")
+#>  [1] 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00 1.00 1.00
+
+round_any(example.vector, by = 0.25, type = "floor")
+#>  [1] 0.00 0.00 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00
+```
+
 ## Imports packages
 
 -   `{purrr}`
