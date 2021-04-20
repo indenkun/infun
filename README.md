@@ -432,9 +432,9 @@ tbl_summary_ex1 %>%
   save_gtsummary(path = "table.pptx")
 ```
 
-### `round_any()`
+### `round_any_*()`
 
-This function is used to round a vector made of numbers to an
+`round_any()` is used to round a vector made of numbers to an
 approximation of a sequence of numbers with arbitrary equidifferences.
 
 If the value matches an arbitrary isoperimetric sequence, the value will
@@ -453,6 +453,26 @@ round_any(example.vector, by = 0.25, type = "ceiling")
 #>  [1] 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00 1.00 1.00
 
 round_any(example.vector, by = 0.25, type = "floor")
+#>  [1] 0.00 0.00 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00
+```
+
+`round_any_up()` is a simplified version of `round_any()`, which outputs
+the result with the argument of `type` fixed to and `origin` fixed to
+`0`. `round_any_down()` is a simplified version of `round_any()`, where
+the `type` argument is fixed to `floor` and the `origin` is fixed to
+`0`. `round_any_*` is faster than `round_any()` in most cases, because
+the internal processing is done as a vector.
+
+**However, in rare cases, `round_any_*()` may not be possible to obtain
+accurate values because of R’s internal floating point arithmetic.
+`round_any()` creates a sequence of numbers and compares them, so it
+gives accurate rounding results.**
+
+``` r
+round_any_up(example.vector, 0.25)
+#>  [1] 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00 1.00 1.00
+
+round_any_down(example.vector, 0.25)
 #>  [1] 0.00 0.00 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00
 ```
 
