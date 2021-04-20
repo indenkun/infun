@@ -456,12 +456,12 @@ round_any(example.vector, by = 0.25, type = "floor")
 #>  [1] 0.00 0.00 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00
 ```
 
-`round_any_up()` is a simplified version of `round_any()`, which outputs
-the result with the argument of `type` fixed to and `origin` fixed to
-`0`. `round_any_down()` is a simplified version of `round_any()`, where
-the `type` argument is fixed to `floor` and the `origin` is fixed to
-`0`. `round_any_*` is faster than `round_any()` in most cases, because
-the internal processing is done as a vector.
+`round_any_ceiling()` is a simplified version of `round_any()`, which
+outputs the result with the argument of `type` fixed to `ceiling` and
+`origin` fixed to `0`. `round_any_floor()` is a simplified version of
+`round_any()`, where the `type` argument is fixed to `floor` and the
+`origin` is fixed to `0`. `round_any_*` is faster than `round_any()` in
+most cases, because the internal processing is done as a vector.
 
 **However, in rare cases, `round_any_*()` may not be possible to obtain
 accurate values because of R’s internal floating point arithmetic.
@@ -469,10 +469,10 @@ accurate values because of R’s internal floating point arithmetic.
 gives accurate rounding results.**
 
 ``` r
-round_any_up(example.vector, 0.25)
+round_any_ceiling(example.vector, 0.25)
 #>  [1] 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00 1.00 1.00
 
-round_any_down(example.vector, 0.25)
+round_any_floor(example.vector, 0.25)
 #>  [1] 0.00 0.00 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00
 ```
 

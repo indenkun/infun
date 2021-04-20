@@ -2,15 +2,15 @@
 % Please edit documentation in R/round_any.R
 \name{round_any}
 \alias{round_any}
-\alias{round_any_up}
-\alias{round_any_down}
+\alias{round_any_ceiling}
+\alias{round_any_floor}
 \title{Rounding to an Arbitrary Value}
 \usage{
 round_any(x, by, type = c("ceiling", "floor"), origin = 0)
 
-round_any_up(x, by)
+round_any_ceiling(x, by)
 
-round_any_down(x, by)
+round_any_floor(x, by)
 }
 \arguments{
 \item{x}{a numeric vector.}
@@ -25,8 +25,8 @@ round_any_down(x, by)
 Outputs a sequence of numbers in which a given vector is close to a sequence of numbers in which an arbitrary value (positive) is specified and that value is the equal difference.
 You can choose how to apply the close values by specifying \code{ceiling} or \code{floor} as the \code{type} argument to make it behave like rounding up or down.
 If the value matches an arbitrary isoperimetric sequence, the value will be output as is.
-\code{round_any_up} is a simplified version of \code{round_any}, which outputs the result with the argument of \code{type} fixed to \code{ceiling} and \code{origin} fixed to \code{0}.
-\code{round_any_down} is a simplified version of \code{round_any}, where the \code{type} argument is fixed to \code{floor} and the \code{origin} is fixed to \code{0}.
+\code{round_any_ceiling} is a simplified version of \code{round_any}, which outputs the result with the argument of \code{type} fixed to \code{ceiling} and \code{origin} fixed to \code{0}.
+\code{round_any_floor} is a simplified version of \code{round_any}, where the \code{type} argument is fixed to \code{floor} and the \code{origin} is fixed to \code{0}.
 \code{round_any_*} is faster than \code{round_any} in most cases, because the internal processing is done as a vector.
 However, in rare cases, \code{round_any_*} may not be possible to obtain accurate values because of R's internal floating point arithmetic. \code{round_any} creates a sequence of numbers and compares them, so it gives accurate rounding results.
 }
