@@ -34,13 +34,15 @@ find.same.value.col <- function(data, col.name = c("number", "name")){
   same.value.col.list
 }
 
+#' @param fromLast logical indicating if duplication should be considered from the reverse side.
+#'
 #' @rdname find.same.value.col
 #' @export
 
-unique_col <- function(data){
+unique_col <- function(data, fromLast = FALSE){
   if(!is.data.frame(data)){
     warning("only data frames can be handled.")
     return(NA)
   }
-  data[!duplicated(as.list(data))]
+  data[!duplicated(as.list(data), fromLast = fromLast)]
 }

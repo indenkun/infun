@@ -81,6 +81,24 @@ find.same.value.col(example.data)
 #> NULL
 ```
 
+`unique_col()` is a function to remove duplicate columns in a data
+frame, the column version of `{base}`’s `unique()`.
+
+``` r
+unique_col(example.data)
+#>    value1  value2 value4
+#> 1       1       1     11
+#> 2       2       2     12
+#> 3       3       3     13
+#> 4       4 strings     14
+#> 5       5       5     15
+#> 6       6       6     16
+#> 7       7       7     17
+#> 8       8       8     18
+#> 9       9       9     19
+#> 10     10      10     20
+```
+
 ### `add.str()`
 
 Combine all the items in a specific column of a data frame with any

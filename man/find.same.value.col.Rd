@@ -7,12 +7,14 @@
 \usage{
 find.same.value.col(data, col.name = c("number", "name"))
 
-unique_col(data)
+unique_col(data, fromLast = FALSE)
 }
 \arguments{
 \item{data}{Data frame to check if there is a column consisting of the same value.}
 
 \item{col.name}{Select whether the columns are represented by column names or by column numbers. The default value is the column number.}
+
+\item{fromLast}{logical indicating if duplication should be considered from the reverse side.}
 }
 \value{
 a list.
