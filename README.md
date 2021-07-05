@@ -379,10 +379,10 @@ package.list <- Rtools.pacman.package.list()
 head(package.list)
 #> [1] "mingw32 mingw-w64-i686-aom 2.0.1-1"                  
 #> [2] "mingw32 mingw-w64-i686-argtable 2.13-1"              
-#> [3] "mingw32 mingw-w64-i686-arrow 3.0.0-1"                
-#> [4] "mingw32 mingw-w64-i686-aws-sdk-cpp 1.7.365-1"        
-#> [5] "mingw32 mingw-w64-i686-binutils 2.33.1-1 [installed]"
-#> [6] "mingw32 mingw-w64-i686-boost 1.67.0-9002"
+#> [3] "mingw32 mingw-w64-i686-arrow 4.0.0-1"                
+#> [4] "mingw32 mingw-w64-i686-atk 2.36.0-2"                 
+#> [5] "mingw32 mingw-w64-i686-aws-sdk-cpp 1.7.365-1"        
+#> [6] "mingw32 mingw-w64-i686-binutils 2.33.1-1 [installed]"
 ```
 
 `Rtools.pacman.package.list()` is a function that displays a list of
@@ -492,6 +492,39 @@ round_any_ceiling(example.vector, 0.25)
 
 round_any_floor(example.vector, 0.25)
 #>  [1] 0.00 0.00 0.00 0.25 0.25 0.50 0.50 0.50 0.75 0.75 1.00
+```
+
+### `rand_moji()`
+
+Function to create a random Japanese (Kanji or Hiragana) string. Only
+the range of regular kanji is supported.
+
+It is also compatible and reproducible for `set.seed()`.
+
+``` r
+rand_moji(length = 3, size = 3, moji = "kanji")
+#> [1] "缶販微" "症凸噴" "侍沖忌"
+
+rand_moji(length = 3, size = 3, moji = "hiragana")
+#> [1] "にうぁ" "もんゐ" "えヴり"
+```
+
+It is a random string, so it does not reflect the normal rules of
+Japanese. In the case of hiragana, characters that do not normally
+appear at the beginning of a string, such as Sutegana and “n”, will also
+appear at the beginning.
+
+Katakana strings are not supported and should be converted using
+functions such as `stringi::stri_trans_general()` in the `{stringi}`
+package.
+
+``` r
+hiragana.moji <- rand_moji(length = 3, size = 3, moji = "hiragana")
+hiragana.moji
+#> [1] "つざそ" "がせど" "せこへ"
+katakana.moji <- stringi::stri_trans_general(hiragana.moji, "hiragana-katakana")
+katakana.moji
+#> [1] "ツザソ" "ガセド" "セコヘ"
 ```
 
 ## Imports packages
