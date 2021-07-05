@@ -11,23 +11,29 @@
 #'
 #' @param length a positive number, the length of the output string.
 #' @param size a positive number, the number of strings to output.
+#' @param replace should sampling be with replacement?
 #' @param moji Select the string to output. Select Kanji or Hiragana.
 #'
 #' @return a vector.
 #'
 #' @examples
-#' rand_moji(3, 3, "kanji")
-#' rand_moji(3, 3, "hiragana")
+#' rand_moji(length = 3, size = 3, moji = "kanji")
+#' rand_moji(length = 3, size = 3, moji = "hiragana")
 #' @export
 
-rand_moji <- function(length, size, moji = c("kanji", "hiragana")){
+rand_moji <- function(length, size, replace = TRUE, moji = c("kanji", "hiragana")){
   moji <- match.arg(moji)
+
   if(length(length) != 1 || length < 0){
     warning("length is a single value that accepts only positive integers.")
     return(NA)
   }
   if(length(size) != 1 || size < 0){
     warning("size is a single value that accepts only positive integers.")
+    return(NA)
+  }
+  if(length(replace) != 1 || is.logical(replace)){
+    warning("replace is a single value that accepts only logical.")
     return(NA)
   }
 
@@ -191,11 +197,13 @@ rand_moji <- function(length, size, moji = c("kanji", "hiragana")){
                 "\u308e")
 
   if(moji == "kanji"){
-    sapply(rep(size, size), function(length){
-      paste0(sample(kanji, length), collapse = "")
-    })}else if(moji == "hiragana"){
-      sapply(rep(size, size), function(length){
-        paste0(sample(hiragana, length), collapse = "")
-      })
-    }
+    sapply(rep(size, size), function(length, replace){
+      paste0(sample(kanji, length, replace = replace), collapse = "")
+    }, replace)
+  }
+  else if(moji == "hiragana"){
+    sapply(rep(size, size), function(length, replace){
+      paste0(sample(hiragana, length, replace = replace), collapse = "")
+    }, replace)
+  }
 }

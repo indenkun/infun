@@ -4,12 +4,14 @@
 \alias{rand_moji}
 \title{Create a random Japanese (Kanji or Hiragana) string}
 \usage{
-rand_moji(length, size, moji = c("kanji", "hiragana"))
+rand_moji(length, size, replace = TRUE, moji = c("kanji", "hiragana"))
 }
 \arguments{
 \item{length}{a positive number, the length of the output string.}
 
 \item{size}{a positive number, the number of strings to output.}
+
+\item{replace}{should sampling be with replacement?}
 
 \item{moji}{Select the string to output. Select Kanji or Hiragana.}
 }
@@ -26,6 +28,6 @@ In the case of hiragana, characters that do not normally appear at the beginning
 Only the range of regular kanji is supported.
 }
 \examples{
-rand_moji(3, 3, "kanji")
-rand_moji(3, 3, "hiragana")
+rand_moji(length = 3, size = 3, moji = "kanji")
+rand_moji(length = 3, size = 3, moji = "hiragana")
 }
