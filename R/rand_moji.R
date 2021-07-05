@@ -22,6 +22,14 @@
 
 rand_moji <- function(length, size, moji = c("kanji", "hiragana")){
   moji <- match.arg(moji)
+  if(length(length) != 1 || length < 0){
+    warning("length is a single value that accepts only positive integers.")
+    return(NA)
+  }
+  if(length(size) != 1 || size < 0){
+    warning("size is a single value that accepts only positive integers.")
+    return(NA)
+  }
 
   # list of kanji for common use (list of 2,136 kanji in Japanese).
   kanji <- c("\u4e9c", "\u54c0", "\u63e1", "\u6271", "\u4f9d", "\u5049", "\u5a01",
