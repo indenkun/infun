@@ -32,7 +32,7 @@ rand_moji <- function(length, size, replace = TRUE, moji = c("kanji", "hiragana"
     warning("size is a single value that accepts only positive integers.")
     return(NA)
   }
-  if(length(replace) != 1 || is.logical(replace)){
+  if(length(replace) != 1 || !is.logical(replace)){
     warning("replace is a single value that accepts only logical.")
     return(NA)
   }
