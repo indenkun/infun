@@ -197,13 +197,13 @@ rand_moji <- function(length, size, replace = TRUE, moji = c("kanji", "hiragana"
                 "\u308e")
 
   if(moji == "kanji"){
-    sapply(rep(size, size), function(length, replace){
-      paste0(sample(kanji, length, replace = replace), collapse = "")
-    }, replace)
+    sapply(rep(size, size), function(size, length, replace){
+      paste0(sample(kanji, size = length, replace = replace), collapse = "")
+    }, length, replace)
   }
   else if(moji == "hiragana"){
-    sapply(rep(size, size), function(length, replace){
-      paste0(sample(hiragana, length, replace = replace), collapse = "")
-    }, replace)
+    sapply(rep(size, size), function(size, length, replace){
+      paste0(sample(hiragana, size = length, replace = replace), collapse = "")
+    }, length, replace)
   }
 }
