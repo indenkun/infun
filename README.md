@@ -527,6 +527,18 @@ katakana.moji
 #> [1] "ツザソ" "ガセド" "セコヘ"
 ```
 
+### `str_remove_sandwich()`
+
+Delete a string of characters sandwiched between specific characters.
+
+The specified string must be a single character, and the first and last
+characters of the string must be different.
+
+``` r
+str_remove_sandwich("西馬音内《にしもない》は雄勝郡羽後町《おがちぐんうごまち》です。", start_pattern = "《", end_pattern = "》")
+#> [1] "西馬音内は雄勝郡羽後町です。"
+```
+
 ## Imports packages
 
 -   `{purrr}`
