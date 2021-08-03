@@ -4,7 +4,7 @@
 #'
 #' \code{age.cal()} is a function that calculates the number of years (age by default), months, and days from a specified date to a specified date.
 #' @param from starting date. Required.
-#' @param to end date.Optional. Optional. Default is today (`sys.Date()`).
+#' @param to end date.Optional. Optional. Default is today (\code{sys.Date()}).
 #' @param size a non-negative integer giving the number of items to choose.
 #' @param replace should sampling be with replacement?
 #' @param prob a vector of probability weights for obtaining the elements of the vector being sampled.

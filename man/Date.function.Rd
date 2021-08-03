@@ -19,7 +19,7 @@ age.cal(from, to = Sys.Date(), by = "year")
 \arguments{
 \item{from}{starting date. Required.}
 
-\item{to}{end date.Optional. Optional. Default is today (`sys.Date()`).}
+\item{to}{end date.Optional. Optional. Default is today (\code{sys.Date()}).}
 
 \item{size}{a non-negative integer giving the number of items to choose.}
 
