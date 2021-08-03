@@ -13,4 +13,5 @@ Imports:
 Suggests: 
     flextable,
     tools,
-    gtsummary
+    gtsummary,
+    lubridate

@@ -77,6 +77,22 @@ find.same.value.col(example.data)
 unique_col(example.data)
 ```
 
+### `find.not.Date.value()`
+
+This function is used to find the where in the vector there are values that cannot be converted to `Date` using `as_date()` in `{lubridate}`.
+
+There is a slight difference between the values that can be converted to Date by `{lubridate}`'s `as_date()` and those that can be converted by `{base}`'s `as.Date()`.
+
+```{r}
+example.data.Date <- data.frame(Date1 <- c("2021-7-28", "2021-08-08", "2021-08-24", "2021-09-05"),
+                                Date2 <- c("2021-7-28", "NOTDATE", "NOTDATE", "2021-09-05"),
+                                Date3 <- c("210728", "21/08/08", "21/Aug-24", "21sep5"))
+
+find.not.Date.value(example.data.Date$Date1)
+find.not.Date.value(example.data.Date$Date2)
+# as_date() converts even relatively fuzzy forms if they can be changed to a date type, while as.Date() operates relatively more strictly.
+find.not.Date.value(example.data.Date$Date3)
+```
 
 ### `add.str()`
 
@@ -147,7 +163,6 @@ tableOne
 tableone.rename.headline(tableOne, rename.headline = list(1 ~ "D-penicillmain", 2 ~ placebo))
 
 ```
-
 
 ### `seq_geometric()`
 
@@ -236,7 +251,6 @@ round_any(example.vector, by = 0.25, type = "ceiling")
 round_any(example.vector, by = 0.25, type = "floor")
 ```
 
-
 `round_any_ceiling()` is a simplified version of `round_any()`, which outputs the result with the argument of `type` fixed to `ceiling` and `origin` fixed to `0`.
 `round_any_floor()` is a simplified version of `round_any()`, where the `type` argument is fixed to `floor` and the `origin` is fixed to `0`.
 `round_any_*` is faster than `round_any()` in most cases, because the internal processing is done as a vector.
@@ -296,6 +310,7 @@ str_remove_sandwich("西馬音内《にしもない》は雄勝郡羽後町《�
 * `{gtsummary}`
 * `{flextable}`
 * `{tools}`
+* `{lubridate}`
 
 ## License
 
