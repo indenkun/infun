@@ -16,9 +16,11 @@ find.not.numeric.value <- function(x, where = c("number", "logical")){
 
   output.df <- data.frame(do.call(rbind, purrr::map(x, purrr::quietly(as.numeric))))
 
-  if(where == "number"){
-    if(length(which(output.df$warnings != "character(0)")) > 0) which(output.df$warnings != "character(0)")
-    else NA
-  }
-  else if(where == "logical") output.df$warnings != "character(0)"
+  unname(
+    if(where == "number"){
+      if(length(which(output.df$warnings != "character(0)")) > 0) which(output.df$warnings != "character(0)")
+      else NA
+    }
+    else if(where == "logical") output.df$warnings != "character(0)"
+  )
 }
