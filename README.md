@@ -99,7 +99,25 @@ unique_col(example.data)
 #> 10     10      10     20
 ```
 
-### `find.not.Date.value()`
+### `find.not.as.Date.value()`
+
+This function is used to find the where in the vector there are values
+that cannot be converted to `Date` using `as.Date()` in `{base}`.
+
+``` r
+example.data.Date <- data.frame(Date1 = c("2021-7-28", "2021-08-08", "2021-08-24", "2021-09-05"),
+                                Date2 = c("2021-7-28", "NOTDATE", "NOTDATE", "2021-09-05"),
+                                Date3 = c("210728", "21/08/08", "21/Aug-24", "21sep5"))
+
+find.not.as.Date.value(example.data.Date$Date1)
+#> [1] NA
+find.not.as.Date.value(example.data.Date$Date2)
+#> [1] 2 3
+find.not.as.Date.value(example.data.Date$Date3)
+#> [1] 1 3 4
+```
+
+### `find.not.sa_date.value()`
 
 This function is used to find the where in the vector there are values
 that cannot be converted to `Date` using `as_date()` in `{lubridate}`.
@@ -109,16 +127,12 @@ Date by `{lubridate}`’s `as_date()` and those that can be converted by
 `{base}`’s `as.Date()`.
 
 ``` r
-example.data.Date <- data.frame(Date1 <- c("2021-7-28", "2021-08-08", "2021-08-24", "2021-09-05"),
-                                Date2 <- c("2021-7-28", "NOTDATE", "NOTDATE", "2021-09-05"),
-                                Date3 <- c("210728", "21/08/08", "21/Aug-24", "21sep5"))
-
-find.not.Date.value(example.data.Date$Date1)
+find.not.as_date.value(example.data.Date$Date1)
 #> [1] NA
-find.not.Date.value(example.data.Date$Date2)
+find.not.as_date.value(example.data.Date$Date2)
 #> [1] 2 3
 # as_date() converts even relatively fuzzy forms if they can be changed to a date type, while as.Date() operates relatively more strictly.
-find.not.Date.value(example.data.Date$Date3)
+find.not.as_date.value(example.data.Date$Date3)
 #> [1] NA
 ```
 
