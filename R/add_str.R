@@ -16,5 +16,12 @@ add.str <- function(data, key, add.string = "ALL"){
     warning("only data frames can be handled.")
     return(NA)
   }
+  if(!all(purrr::map_lgl(key, function(key){
+    key %in% colnames(data)
+  }))){
+    warning("the column name must be the name contained in the original data frame.")
+    return(NA)
+  }
+
   rbind(data, replace(data, key, add.string))
 }
