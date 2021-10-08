@@ -5,7 +5,7 @@
 #' The converted column will be a string because it contains strings such as ALL.
 #' @param data Specify the data frame to be converted. No other data frame is accepted.
 #' @param key Specify the name of the column where you want to convert the value to ALL, etc. and combine them. If the column name does not exist in the data frame, an error occurs.
-#' @param add.string Specifies an any string. Convert the specified column to any string of characters. The default value is ALL.
+#' @param add.string Specifies an any single string or value. Convert the specified column to any string of characters or value. The default value is ALL.
 #'
 #' @return a data frame.
 #'
@@ -20,6 +20,10 @@ add.str <- function(data, key, add.string = "ALL"){
     key %in% colnames(data)
   }))){
     warning("the column name must be the name contained in the original data frame.")
+    return(NA)
+  }
+  if(length(add.string) != 1){
+    warning("the value to be added must be a single value.")
     return(NA)
   }
 
