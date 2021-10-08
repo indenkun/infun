@@ -117,7 +117,7 @@ find.not.as.Date.value(example.data.Date$Date3)
 #> [1] 1 3 4
 ```
 
-### `find.not.sa_date.value()`
+### `find.not.as_date.value()`
 
 This function is used to find the where in the vector there are values
 that cannot be converted to `Date` using `as_date()` in `{lubridate}`.
@@ -416,7 +416,7 @@ package.list <- Rtools.pacman.package.list()
 head(package.list)
 #> [1] "mingw32 mingw-w64-i686-aom 2.0.1-1"                  
 #> [2] "mingw32 mingw-w64-i686-argtable 2.13-1"              
-#> [3] "mingw32 mingw-w64-i686-arrow 4.0.0-1"                
+#> [3] "mingw32 mingw-w64-i686-arrow 5.0.0-1"                
 #> [4] "mingw32 mingw-w64-i686-atk 2.36.0-2"                 
 #> [5] "mingw32 mingw-w64-i686-aws-sdk-cpp 1.7.365-1"        
 #> [6] "mingw32 mingw-w64-i686-binutils 2.33.1-1 [installed]"

@@ -91,7 +91,7 @@ find.not.as.Date.value(example.data.Date$Date2)
 find.not.as.Date.value(example.data.Date$Date3)
 ```
 
-### `find.not.sa_date.value()`
+### `find.not.as_date.value()`
 
 This function is used to find the where in the vector there are values that cannot be converted to `Date` using `as_date()` in `{lubridate}`.
 
