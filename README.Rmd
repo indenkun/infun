@@ -52,11 +52,18 @@ example.data <- data.frame(value1 = 1:10,
 
 This function is used to find the where in the vector there are values that cannot be converted to numbers.
 
+If you specify a column from the dataframe with `[]`, it behaves in the same way.
+
+If you input a dataframe that contains multiple columns, it will return the location of the column that contains the value that cannot be converted to a number, if specified.
+
 The fourth data in value2 of `example.data` will be a string. `find.not.numeric.value()` will show where all the data in the vector is located if there is a value that will be forced to NA when converted to numeric type by `as.numeric()`. If there is no value to be converted, NA is returned.
 
 ```{r}
 find.not.numeric.value(example.data$value1)
 find.not.numeric.value(example.data$value2)
+find.not.numeric.value(example.data[1])
+find.not.numeric.value(example.data[2])
+find.not.numeric.value(example.data)
 ```
 
 ### `find.same.value.col()`
