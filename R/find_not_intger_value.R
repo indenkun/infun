@@ -1,6 +1,6 @@
 #' Find Where Values in the Vector that non-integer
 #' @description
-#' This function is used to find a non-integer value in a vector
+#' This function is used to find a non-integer value in a vector.
 #' The input value can be of any type, but it must be a vector of numbers only.
 #' If a string or other value is entered, a warning message will be displayed and NA will be returned.
 #' @param x vector or data frame to examine.
@@ -30,7 +30,7 @@ find.not.integer.value <- function(x, where = c("number", "logical")){
 
   ans <- if(is.data.frame(x) && ncol(x) >= 2){
     purrr::map_lgl(x, function(x){
-      all(trunc(x) != x)
+      any(trunc(x) != x)
     })
   }else{
     trunc(x) != x

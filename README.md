@@ -112,6 +112,46 @@ unique_col(example.data)
 #> 10     10      10     20
 ```
 
+### `find.not.integer.value()`
+
+This function is used to find a non-integer value in a vector.
+
+The input value can be of any type, but it must be a vector of numbers
+only. If a string or other value is entered, a warning message will be
+displayed and `NA` will be returned. If you get a warning message that a
+non-numeric value is entered, try `find.not.numeric.value()` to find the
+non-numeric value.
+
+If you input a dataframe that contains multiple columns, it will return
+the location of the column that contains the value that non-integer, if
+specified.
+
+``` r
+example.data.integer <- data.frame(Item1 = 1:10,
+                                   Item2 = c(1:5, 6.5, 7.5, 8:10),
+                                   Item3 = c(1:6, "strings", 8:10))
+```
+
+Returns the location as a number if the value is not an integer. If no
+non-integer values are entered in a vector consisting of numbers, NA
+will be returned.
+
+If `"logical"` is specified in `where`, a vector of logical type will be
+returned.
+
+``` r
+find.not.integer.value(example.data.integer$Item1)
+#> [1] NA
+find.not.integer.value(example.data.integer[2])
+#> [1] 6 7
+find.not.integer.value(example.data.integer[1:2])
+#> [1] 2
+find.not.integer.value(example.data.integer$Item3)
+#> Warning in find.not.integer.value(example.data.integer$Item3): there are any
+#> values that not numeric value.
+#> [1] NA
+```
+
 ### `find.not.as.Date.value()`
 
 This function is used to find the where in the vector there are values

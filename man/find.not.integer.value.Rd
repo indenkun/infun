@@ -12,7 +12,7 @@ find.not.integer.value(x, where = c("number", "logical"))
 \item{where}{Choose whether to indicate where there are values that cannot be converted to numbers, either as numbers or logical types.}
 }
 \description{
-This function is used to find a non-integer value in a vector
+This function is used to find a non-integer value in a vector.
 The input value can be of any type, but it must be a vector of numbers only.
 If a string or other value is entered, a warning message will be displayed and NA will be returned.
 }
