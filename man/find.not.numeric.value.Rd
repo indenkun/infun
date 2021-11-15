@@ -7,11 +7,14 @@
 find.not.numeric.value(x, where = c("number", "logical"))
 }
 \arguments{
-\item{x}{vector to examine.}
+\item{x}{vector or data frame to examine.}
 
 \item{where}{Choose whether to indicate where there are values that cannot be converted to numbers, either as numbers or logical types.}
 }
 \description{
-This function is used to find the where in the vector there are values that cannot be converted to numbers.
+This function is used to find the where in the vector or data frame there are values that cannot be converted to numbers.
 The result will be the location of the value that cannot be converted to a number in the vector by default.
+}
+\seealso{
+If a data frame of more than two dimensions is entered, returns the column numbers where the columns contain values that cannot be converted to numbers.
 }
