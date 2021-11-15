@@ -30,7 +30,7 @@ find.not.integer.value <- function(x, where = c("number", "logical")){
 
   ans <- if(is.data.frame(x) && ncol(x) >= 2){
     purrr::map_lgl(x, function(x){
-      all(trunc(x) == x)
+      all(trunc(x) != x)
     })
   }else{
     trunc(x) != x
