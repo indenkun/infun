@@ -629,6 +629,13 @@ str_remove_sandwich("西馬音内《にしもない》は雄勝郡羽後町《�
 #> [1] "西馬音内は雄勝郡羽後町です。"
 ```
 
+Please escape characters that need to be escaped, such as `()`.
+
+``` r
+str_remove_sandwich("dplyr (≥ 0.8.3), arabic2kansuji (≥ 0.1.0)", "\\(", "\\)")
+#> [1] "dplyr , arabic2kansuji "
+```
+
 ## Imports packages
 
 -   `{purrr}`

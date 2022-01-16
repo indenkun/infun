@@ -345,6 +345,12 @@ The specified string must be a single character, and the first and last characte
 str_remove_sandwich("西馬音内《にしもない》は雄勝郡羽後町《おがちぐんうごまち》です。", start_pattern = "《", end_pattern = "》")
 ```
 
+Please escape characters that need to be escaped, such as `()`.
+
+```{r}
+str_remove_sandwich("dplyr (≥ 0.8.3), arabic2kansuji (≥ 0.1.0)", "\\(", "\\)")
+```
+
 ## Imports packages
 
 * `{purrr}`
