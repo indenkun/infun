@@ -23,3 +23,6 @@ The result will be the location of the value that cannot be converted to a numbe
 There is a slight difference between the values that can be converted to Date by \code{lubridate}'s \code{as_date} and those that can be converted by \code{base}'s \code{as.Date}.
 \code{as_date} converts even relatively fuzzy forms if they can be changed to a \code{Date} class, while \code{as.Date} operates relatively more strictly.
 }
+\seealso{
+If a data frame of more than two dimensions is entered, returns the column numbers where the columns contain values that cannot be converted to Date.
+}

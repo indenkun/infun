@@ -8,6 +8,8 @@
 #' @note
 #' There is a slight difference between the values that can be converted to Date by \code{lubridate}'s \code{as_date} and those that can be converted by \code{base}'s \code{as.Date}.
 #' \code{as_date} converts even relatively fuzzy forms if they can be changed to a \code{Date} class, while \code{as.Date} operates relatively more strictly.
+#' @seealso
+#' If a data frame of more than two dimensions is entered, returns the column numbers where the columns contain values that cannot be converted to Date.
 #' @rdname find.not.Date.value
 #' @export
 
@@ -16,9 +18,13 @@ find.not.as_date.value <- function(x, where = c("number", "logical")){
 
   if(!requireNamespace("lubridate", quietly = TRUE)) stop("This function will not work unless the `{lubridate}` package is installed")
 
-  if(!is.vector(x)){
-    warning("only vectors can be handled.")
+  if(!is.vector(x) && !is.data.frame(x)){
+    warning("only vectors or data frame can be handled.")
     return(NA)
+  }
+
+  if(is.data.frame(x) && dim(x)[2] == 1){
+    x <- as.vector(as.matrix(x))
   }
 
   output.df <- data.frame(do.call(rbind, purrr::map(x, purrr::quietly(lubridate::as_date))))
@@ -40,9 +46,13 @@ find.not.as.Date.value <- function(x, where = c("number", "logical")){
 
   if(!requireNamespace("lubridate", quietly = TRUE)) stop("This function will not work unless the `{lubridate}` package is installed")
 
-  if(!is.vector(x)){
-    warning("only vectors can be handled.")
+  if(!is.vector(x) && !is.data.frame(x)){
+    warning("only vectors or data frame can be handled.")
     return(NA)
+  }
+
+  if(is.data.frame(x) && dim(x)[2] == 1){
+    x <- as.vector(as.matrix(x))
   }
 
   output.df <- data.frame(do.call(rbind, purrr::map(x, purrr::safely(as.Date))))
