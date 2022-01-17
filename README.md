@@ -636,6 +636,29 @@ str_remove_sandwich("dplyr (≥ 0.8.3), arabic2kansuji (≥ 0.1.0)", "\\(", "\\)
 #> [1] "dplyr , arabic2kansuji "
 ```
 
+### `subset_interchange_col()`
+
+For any two columns specified in the data frame (say column A and B), if
+the combination of column A and B is the same even if they are swapped,
+it will return it as a data frame or a row number. For example, if
+column A has “TOM” and “BOB”, and the same respective row in column B
+has “BOB” and “TOM”BOB” and “TOM” in the same row of column B, the row
+will be extracted as interchangeable. Also, when there is a row with the
+same value in column A and B, it is also determined to be
+interchangeable and extracted.
+
+``` r
+example.interchange <- data.frame(X = c("TOM", "BOB", "JOHN", "POP"),
+                                  Y = c("BOB", "TOM", "BEE", "TOO"),
+                                  Z = seq(10, 40, by = 10))
+subset_interchange_col(example.interchange, "X", "Y")
+#>     X   Y  Z
+#> 1 TOM BOB 10
+#> 2 BOB TOM 20
+subset_interchange_col(example.interchange, "X", "Y", out.put = "num")
+#> [1] 1 2
+```
+
 ## Imports packages
 
 -   `{purrr}`
