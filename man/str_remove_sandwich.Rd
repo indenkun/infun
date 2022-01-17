@@ -19,5 +19,5 @@ str_remove_sandwich(string, start_pattern, end_pattern, perl = FALSE)
 Delete a string of characters sandwiched between specific characters.
 }
 \details{
-The specified string must be a single character, and the first and last characters of the string must be different.
+The specified string must be a single character or three characters including the escape, and the first and last characters of the string must be different.
 }
