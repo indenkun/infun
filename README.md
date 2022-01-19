@@ -640,11 +640,14 @@ str_remove_sandwich("dplyr (≥ 0.8.3), arabic2kansuji (≥ 0.1.0)", "\\(", "\\)
 
 For any two columns specified in the data frame (say column A and B), if
 the combination of column A and B is the same even if they are swapped,
-it will return it as a data frame or a row number. For example, if
-column A has “TOM” and “BOB”, and the same respective row in column B
-has “BOB” and “TOM”, the row will be extracted as interchangeable. Also,
-when there is a row with the same value in column A and B, it is also
-determined to be interchangeable and extracted.
+it will return it as a data frame or a row number.
+
+For example, if column A has “TOM” and “BOB”, and the same respective
+row in column B has “BOB” and “TOM”, the row will be extracted as
+interchangeable.
+
+Also, when there is a row with the same value in column A and B, it is
+also determined to be interchangeable and extracted.
 
 ``` r
 example.interchange <- data.frame(X = c("TOM", "BOB", "JOHN", "POP"),
@@ -656,6 +659,59 @@ subset_interchange_col(example.interchange, "X", "Y")
 #> 2 BOB TOM 20
 subset_interchange_col(example.interchange, "X", "Y", out.put = "num")
 #> [1] 1 2
+```
+
+### `list2data.frame_*()`
+
+Function to convert a list into a dataframe.
+
+For list of different lengths, the data frame is constructed according
+to the longest list, and for short lists, the missing places are filled
+with NA according to the long list.
+
+`list2data.frame_cbind()` makes each element of the list a column.
+
+`list2data.frame_rbind()` makes each element of the list a row.
+
+``` r
+multi_length_list <- list(A = 1,
+                          B = 1:2,
+                          C = 1:3,
+                          D = c(1, NA, 3:4),
+                          E = c(1, NA))
+list2data.frame_cbind(multi_length_list)
+#>    A  B  C  D  E
+#> 1  1  1  1  1  1
+#> 2 NA  2  2 NA NA
+#> 3 NA NA  3  3 NA
+#> 4 NA NA NA  4 NA
+list2data.frame_rbind(multi_length_list)
+#>   X1 X2 X3 X4
+#> A  1 NA NA NA
+#> B  1  2 NA NA
+#> C  1  2  3 NA
+#> D  1 NA  3  4
+#> E  1 NA NA NA
+```
+
+Of course, lists of the same length can also be converted to data
+frames.
+
+``` r
+equal_length_list <- list(a = 1:4,
+                          b = 5:8,
+                          c = 9:12)
+list2data.frame_cbind(equal_length_list)
+#>   a b  c
+#> 1 1 5  9
+#> 2 2 6 10
+#> 3 3 7 11
+#> 4 4 8 12
+list2data.frame_rbind(equal_length_list)
+#>   X1 X2 X3 X4
+#> a  1  2  3  4
+#> b  5  6  7  8
+#> c  9 10 11 12
 ```
 
 ## Imports packages
