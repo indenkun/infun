@@ -408,6 +408,7 @@ list2data.frame_rbind(equal_length_list)
 * `{flextable}`
 * `{tools}`
 * `{lubridate}`
+* `{dplyr}`
 
 ## License
 
