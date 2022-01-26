@@ -714,6 +714,38 @@ list2data.frame_rbind(equal_length_list)
 #> c  9 10 11 12
 ```
 
+### `objcets_length*()`
+
+`objects_length()` returns the length value of the input object as a
+vector.
+
+`objects_length_all_equal` returns TRUE if the lengths of all input
+objects are equal, and FALSE if any one of them is different.
+
+`objects_length_num_equal` returns TRUE if the length of the input
+object is at least one equal to the length specified by .num.
+
+`objects_length_num_equal_quantity` returns the number of input objects
+whose length is equal to the length specified by .num. If .quantity is
+specified, it will return TRUE if the answer is equal to the specified
+number.
+
+``` r
+x <- 1:3
+y <- 1:6
+z <- 1:3
+objects_length(x, y, z)
+#> [1] 3 6 3
+objects_length_all_equal(x, y, z)
+#> [1] FALSE
+objects_length_num_equal(x, y, z, .num = 6)
+#> [1] TRUE
+objects_length_num_equal_quantity(x, y, z, .num = 3)
+#> [1] 2
+objects_length_num_equal_quantity(x, y, z, .num = 3, .quantity = 2)
+#> [1] TRUE
+```
+
 ## Imports packages
 
 -   `{purrr}`
