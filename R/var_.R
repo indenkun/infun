@@ -36,20 +36,18 @@ var_ <- function(x,
     alpha <- (1 - conf.level) / 2
     cint <- c(df * estimate / stats::qchisq(1 - alpha, df),
               df * estimate / stats::qchisq(alpha, df))
-    attr(cint, "conf.level") <- conf.level
     if(estimate >= mu)
       pval <- stats::pchisq(statistic, df, lower.tail = FALSE) * 2
     else if(estimate < mu)
       pval <- stats::pchisq(statistic, df, lower.tail = TRUE) * 2
   }else if(alternative == "less"){
     cint <- c(0, df * estimate / stats::qchisq(conf.level, df, lower.tail = FALSE))
-    attr(cint, "conf.level") <- conf.level
     pval <- stats::pchisq(statistic, df, lower.tail = TRUE)
   }else if(alternative == "greater"){
     cint <- c(df * estimate / stats::qchisq(conf.level, df), Inf)
-    attr(cint, "conf.level") <- conf.level
     pval <- stats::pchisq(statistic, df, lower.tail = FALSE)
   }
+  attr(cint, "conf.level") <- conf.level
 
   rval <- list(statistic = statistic,
                parameter = df,
