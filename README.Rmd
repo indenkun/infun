@@ -418,9 +418,18 @@ objects_length_num_equal_quantity(x, y, z, .num = 3)
 objects_length_num_equal_quantity(x, y, z, .num = 3, .quantity = 2)
 ```
 
+### `var_()`
+
+`var_()` computes an interval estimate of the population variance of `x` and a hypothesis test using the given population variance.
+
+```{r}
+var_(iris$Sepal.Length)
+```
+
 ## Imports packages
 
 * `{purrr}`
+* `{stats}`
 
 ## Suggests packages
 

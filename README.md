@@ -746,9 +746,30 @@ objects_length_num_equal_quantity(x, y, z, .num = 3, .quantity = 2)
 #> [1] TRUE
 ```
 
+### `var_()`
+
+`var_()` computes an interval estimate of the population variance of `x`
+and a hypothesis test using the given population variance.
+
+``` r
+var_(iris$Sepal.Length)
+#> 
+#>  Chi-squared test
+#> 
+#> data:  iris$Sepal.Length
+#> X-squared = Inf, df = 149, p-value < 2.2e-16
+#> alternative hypothesis: true var is not equal to 0
+#> 95 percent confidence interval:
+#>  0.5531973 0.8725029
+#> sample estimates:
+#>       var 
+#> 0.6856935
+```
+
 ## Imports packages
 
 -   `{purrr}`
+-   `{stats}`
 
 ## Suggests packages
 
