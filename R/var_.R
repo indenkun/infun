@@ -5,6 +5,8 @@
 #' @param alternative a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less". You can specify just the initial letter.
 #' @param mu a number indicating the true value of the population variance.
 #' @param conf.level confidence level of the interval.
+#' @details
+#' The sample variance of the estimate is the unbiased variance computed with \code{stats::var}. It also calculates the population variance assuming the given value is the population.
 #' @export
 
 var_ <- function(x,
@@ -26,8 +28,9 @@ var_ <- function(x,
 
   dname <- deparse(substitute(x))
   estimate <- stats::var(x)
+  ESTIMATE <- c(estimate, estimate * df / length(x))
   statistic <- df * estimate / mu
-  names(estimate) <- "var"
+  names(ESTIMATE) <- c("sample_variance", "population_variance")
   names(mu) <- "var"
   names(df) <- "df"
   names(statistic) <- "X-squared"
@@ -36,9 +39,8 @@ var_ <- function(x,
     alpha <- (1 - conf.level) / 2
     cint <- c(df * estimate / stats::qchisq(1 - alpha, df),
               df * estimate / stats::qchisq(alpha, df))
-    if(estimate >= mu)
-      pval <- stats::pchisq(statistic, df, lower.tail = FALSE) * 2
-    else if(estimate < mu)
+    pval <- stats::pchisq(statistic, df, lower.tail = FALSE) * 2
+    if(pval > 1)
       pval <- stats::pchisq(statistic, df, lower.tail = TRUE) * 2
   }else if(alternative == "less"){
     cint <- c(0, df * estimate / stats::qchisq(conf.level, df, lower.tail = FALSE))
@@ -52,7 +54,7 @@ var_ <- function(x,
   rval <- list(statistic = statistic,
                parameter = df,
                conf.int = cint,
-               estimate = estimate,
+               estimate = ESTIMATE,
                null.value = mu,
                method = "Chi-squared test",
                p.value = pval,

@@ -751,6 +751,10 @@ objects_length_num_equal_quantity(x, y, z, .num = 3, .quantity = 2)
 `var_()` computes an interval estimate of the population variance of `x`
 and a hypothesis test using the given population variance.
 
+The sample variance of the estimate is the unbiased variance computed
+with `stats::var()`. It also calculates the population variance assuming
+the given value is the population.
+
 ``` r
 var_(iris$Sepal.Length)
 #> 
@@ -762,8 +766,8 @@ var_(iris$Sepal.Length)
 #> 95 percent confidence interval:
 #>  0.5531973 0.8725029
 #> sample estimates:
-#>       var 
-#> 0.6856935
+#>     sample_variance population_variance 
+#>           0.6856935           0.6811222
 ```
 
 ## Imports packages

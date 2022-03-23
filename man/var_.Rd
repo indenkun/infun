@@ -23,3 +23,6 @@ var_(
 \description{
 Compute an interval estimate of the population variance of x and a hypothesis test using the given population variance.
 }
+\details{
+The sample variance of the estimate is the unbiased variance computed with \code{stats::var}. It also calculates the population variance assuming the given value is the population.
+}
