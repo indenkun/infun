@@ -3,7 +3,7 @@
 #' Compute an interval estimate of the population variance of x and a hypothesis test using the given population variance.
 #' @param x a (non-empty) numeric vector of data values.
 #' @param alternative a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less". You can specify just the initial letter.
-#' @param mu a number indicating the true value of the population variance.
+#' @param pv a number indicating the true value of the population variance.
 #' @param conf.level confidence level of the interval.
 #' @details
 #' The sample variance of the estimate is the unbiased variance computed with \code{stats::var}. It also calculates the population variance assuming the given value is the population.
@@ -11,7 +11,7 @@
 
 var_ <- function(x,
                  alternative = c("two.sided", "less", "greater"),
-                 mu = 0,
+                 pv = 0,
                  conf.level = 0.95){
   alternative <- match.arg(alternative)
   dname <- deparse(substitute(x))
@@ -25,7 +25,7 @@ var_ <- function(x,
   }
   stopifnot(is.numeric(x))
 
-  if(!missing(mu) && (length(mu) != 1 || is.na(mu)))
+  if(!missing(pv) && (length(pv) != 1 || is.na(pv)))
     stop("'mu' must be a single number")
   if(!missing(conf.level) &&
      (length(conf.level) != 1 || !is.finite(conf.level) ||
@@ -39,9 +39,9 @@ var_ <- function(x,
 
   estimate <- stats::var(x)
   ESTIMATE <- c(estimate, estimate * df / nx)
-  statistic <- df * estimate / mu
+  statistic <- df * estimate / pv
   names(ESTIMATE) <- c("sample_variance", "population_variance")
-  names(mu) <- "var"
+  names(pv) <- "population variance"
   names(df) <- "df"
   names(statistic) <- "X-squared"
 
@@ -65,7 +65,7 @@ var_ <- function(x,
                parameter = df,
                conf.int = cint,
                estimate = ESTIMATE,
-               null.value = mu,
+               null.value = pv,
                method = "Chi-squared test",
                p.value = pval,
                alternative = alternative,
