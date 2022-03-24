@@ -50,7 +50,7 @@ var_ <- function(x,
     cint <- c(df * estimate / stats::qchisq(1 - alpha, df),
               df * estimate / stats::qchisq(alpha, df))
     pval <- stats::pchisq(statistic, df, lower.tail = FALSE) * 2
-    if(pval > 1)
+    if(pval > 1 || is.na(pval))
       pval <- stats::pchisq(statistic, df, lower.tail = TRUE) * 2
   }else if(alternative == "less"){
     cint <- c(0, df * estimate / stats::qchisq(conf.level, df, lower.tail = FALSE))
