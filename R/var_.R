@@ -16,6 +16,8 @@ var_ <- function(x,
   alternative <- match.arg(alternative)
   dname <- deparse(substitute(x))
 
+  stopifnot(is.vector(x) || is.data.frame(x))
+
   if(is.data.frame(x)){
     if(length(x) != 1)
       stop("data frames must be only one column")
