@@ -14,6 +14,14 @@ var_ <- function(x,
                  mu = 0,
                  conf.level = 0.95){
   alternative <- match.arg(alternative)
+  dname <- deparse(substitute(x))
+
+  if(is.data.frame(x)){
+    if(length(x) != 1)
+      stop("data frames must be only one column")
+    x <- as.vector(as.matrix(x))
+  }
+  stopifnot(is.numeric(x))
 
   if(!missing(mu) && (length(mu) != 1 || is.na(mu)))
     stop("'mu' must be a single number")
@@ -22,13 +30,13 @@ var_ <- function(x,
       conf.level < 0 || conf.level > 1))
     stop("'conf.level' must be a single number between 0 and 1")
 
-  df <- length(x) - 1
-  if(df < 0)
+  nx <- length(x)
+  if(nx < 2)
     stop("data are essentially constant")
+  df <- nx - 1
 
-  dname <- deparse(substitute(x))
   estimate <- stats::var(x)
-  ESTIMATE <- c(estimate, estimate * df / length(x))
+  ESTIMATE <- c(estimate, estimate * df / nx)
   statistic <- df * estimate / mu
   names(ESTIMATE) <- c("sample_variance", "population_variance")
   names(mu) <- "var"
