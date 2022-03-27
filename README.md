@@ -752,8 +752,12 @@ objects_length_num_equal_quantity(x, y, z, .num = 3, .quantity = 2)
 and a hypothesis test using the given population variance.
 
 The sample variance of the estimate is the unbiased variance computed
-with `stats::var()`. It also calculates the population variance assuming
-the given value is the population.
+with `stats::var()`.
+
+It also calculates the population variance assuming the given value is
+the population.
+
+Returns results in the “htest” class.
 
 ``` r
 var_(iris$Sepal.Length)
@@ -762,7 +766,7 @@ var_(iris$Sepal.Length)
 #> 
 #> data:  iris$Sepal.Length
 #> X-squared = Inf, df = 149, p-value < 2.2e-16
-#> alternative hypothesis: true var is not equal to 0
+#> alternative hypothesis: true population variance is not equal to 0
 #> 95 percent confidence interval:
 #>  0.5531973 0.8725029
 #> sample estimates:
