@@ -224,6 +224,8 @@ These are functions to search for packages that can be installed by Rtools' pacm
 
 Cannot be used except in a Windows environment where Rtools40 or later is installed.
 
+You may not be able to use the functions in Rtools42(on R 4.2.x). Please configure Rtools42 before executing the function.
+
 `Rtools.pacman.package.list()` is a function that outputs a list of packages that can be installed by Rtools pacman from repository. By specifying arguments, you can extract only those packages that are already installed, or only those that are yet uninstalled.
 
 ```{r}
@@ -235,7 +237,9 @@ head(package.list)
 `Rtools.pacman.package.list()` is a function that displays a list of packages that can be installed by pacman in Rtools from repository with the specified arguments in the string. If no matching package is found, return NA.
 
 ```{r}
-Rtools.pacman.package.find("curl")
+package.list.curl <- Rtools.pacman.package.find("curl")
+# It's too long, so show part of it in head()
+head(package.list.curl)
 ```
 
 ### `scale.data.frame()`
@@ -430,6 +434,20 @@ Returns results in the "htest" class.
 
 ```{r}
 var_(iris$Sepal.Length)
+```
+
+### label_vertical()
+
+`label_vetical()` is function to convert the axis labels of a ggplot2 format graph to a vertical writing system.
+
+It does not actually realize the vertical writing system, but actually just changes lines one character at a time.
+
+If horizontal bars are not replaced with vertical bars, unnatural Japanese notation may result. By default, some horizontal bars are specified with `vertical_list()` and replaced with vertical bars.
+
+```{r}
+touhoku <- c("青森県", "秋田県", "岩手県", "山形県", "宮城県", "福島県")
+scales::demo_discrete(touhoku)
+scales::demo_discrete(touhoku, labels = label_vertical())
 ```
 
 ## Imports packages

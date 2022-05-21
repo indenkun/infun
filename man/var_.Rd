@@ -7,7 +7,7 @@
 var_(
   x,
   alternative = c("two.sided", "less", "greater"),
-  mu = 0,
+  pv = 0,
   conf.level = 0.95
 )
 }
@@ -16,7 +16,7 @@ var_(
 
 \item{alternative}{a character string specifying the alternative hypothesis, must be one of "two.sided" (default), "greater" or "less". You can specify just the initial letter.}
 
-\item{mu}{a number indicating the true value of the population variance.}
+\item{pv}{a number indicating the true value of the population variance.}
 
 \item{conf.level}{confidence level of the interval.}
 }

@@ -458,6 +458,9 @@ pacman in Rtools.
 Cannot be used except in a Windows environment where Rtools40 or later
 is installed.
 
+You may not be able to use the functions in Rtools42(on R 4.2.x). Please
+configure Rtools42 before executing the function.
+
 `Rtools.pacman.package.list()` is a function that outputs a list of
 packages that can be installed by Rtools pacman from repository. By
 specifying arguments, you can extract only those packages that are
@@ -467,12 +470,12 @@ already installed, or only those that are yet uninstalled.
 package.list <- Rtools.pacman.package.list()
 # It's too long, so show part of it in head()
 head(package.list)
-#> [1] "mingw32 mingw-w64-i686-aom 2.0.1-1"                  
-#> [2] "mingw32 mingw-w64-i686-argtable 2.13-1"              
-#> [3] "mingw32 mingw-w64-i686-arrow 5.0.0-1"                
-#> [4] "mingw32 mingw-w64-i686-atk 2.36.0-2"                 
-#> [5] "mingw32 mingw-w64-i686-aws-sdk-cpp 1.7.365-1"        
-#> [6] "mingw32 mingw-w64-i686-binutils 2.33.1-1 [installed]"
+#> [1] "mingw32 mingw-w64-i686-3proxy 0.9.4-1"               
+#> [2] "mingw32 mingw-w64-i686-4th 3.62.5-1"                 
+#> [3] "mingw32 mingw-w64-i686-FAudio 22.04-1"               
+#> [4] "mingw32 mingw-w64-i686-MinHook 1.3.3-2"              
+#> [5] "mingw32 mingw-w64-i686-OpenSceneGraph 3.6.5-10"      
+#> [6] "mingw32 mingw-w64-i686-OpenSceneGraph-debug 3.6.5-10"
 ```
 
 `Rtools.pacman.package.list()` is a function that displays a list of
@@ -481,9 +484,15 @@ the specified arguments in the string. If no matching package is found,
 return NA.
 
 ``` r
-Rtools.pacman.package.find("curl")
-#> [1] "mingw32/mingw-w64-i686-curl 7.64.1-9202 [installed]"  
-#> [2] "mingw64/mingw-w64-x86_64-curl 7.64.1-9202 [installed]"
+package.list.curl <- Rtools.pacman.package.find("curl")
+# It's too long, so show part of it in head()
+head(package.list.curl)
+#> [1] "mingw32/mingw-w64-i686-curl 7.83.1-1"         
+#> [2] "mingw32/mingw-w64-i686-curl-gnutls 7.83.1-1"  
+#> [3] "mingw32/mingw-w64-i686-curl-winssl 7.83.1-1"  
+#> [4] "mingw32/mingw-w64-i686-flickcurl 1.26-5"      
+#> [5] "mingw32/mingw-w64-i686-python-pycurl 7.45.1-1"
+#> [6] "mingw64/mingw-w64-x86_64-curl 7.83.1-1"
 ```
 
 ### `scale.data.frame()`
@@ -773,6 +782,33 @@ var_(iris$Sepal.Length)
 #>     sample_variance population_variance 
 #>           0.6856935           0.6811222
 ```
+
+### label_vertical()
+
+`label_vetical()` is function to convert the axis labels of a ggplot2
+format graph to a vertical writing system.
+
+It does not actually realize the vertical writing system, but actually
+just changes lines one character at a time.
+
+If horizontal bars are not replaced with vertical bars, unnatural
+Japanese notation may result. By default, some horizontal bars are
+specified with `vertical_list()` and replaced with vertical bars.
+
+``` r
+touhoku <- c("青森県", "秋田県", "岩手県", "山形県", "宮城県", "福島県")
+scales::demo_discrete(touhoku)
+#> scale_x_discrete()
+```
+
+<img src="man/figures/README-unnamed-chunk-27-1.png" width="100%" />
+
+``` r
+scales::demo_discrete(touhoku, labels = label_vertical())
+#> scale_x_discrete(labels = label_vertical())
+```
+
+<img src="man/figures/README-unnamed-chunk-27-2.png" width="100%" />
 
 ## Imports packages
 
