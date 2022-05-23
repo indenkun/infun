@@ -5,12 +5,20 @@
 \alias{vertical_list}
 \title{Labels to Vertical Writing System}
 \usage{
-label_vertical(replace_list = vertical_list())
+label_vertical(
+  replace_list = vertical_list(),
+  line_feed = NULL,
+  blank_space = "    "
+)
 
 vertical_list()
 }
 \arguments{
 \item{replace_list}{Specifies what to replace the string with, either in expression form or in list form containing expression forms. If no replacements are needed, specify NULL.}
+
+\item{line_feed}{Enter a key character or escape sequence for line breaks. This is given directly to \code{\link[base]{strsplit}} as an argument, so it must be in an acceptable form. If NULL is given, no line breaks will be made.}
+
+\item{blank_space}{Adjust the blanks to adjust for slight misalignment in strings that have no characters on the adjacent line when breaking lines. Please enter the required amount. If you enter a string or other text, the string will be output where there is no string.}
 }
 \description{
 \code{label_vetical} is function to convert the axis labels of a ggplot2 format graph to a vertical writing system.
@@ -19,4 +27,6 @@ vertical_list()
 \details{
 It does not actually realize the vertical writing system, but actually just changes lines one character at a time.
 If horizontal bars are not replaced with vertical bars, unnatural Japanese notation may result.
+
+The function to express line breaks when the text consists only of Japanese has been provided, but there is a possibility of misalignment when half-width characters are included or when proportional fonts are used.
 }

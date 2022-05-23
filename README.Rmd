@@ -450,6 +450,14 @@ scales::demo_discrete(touhoku)
 scales::demo_discrete(touhoku, labels = label_vertical())
 ```
 
+The function to express line breaks when the text consists only of Japanese has been provided, but there is a possibility of misalignment when half-width characters are included or when proportional fonts are used.
+
+```{r}
+tiiki <- c("秋田県\n東北", "東京都\n関東", "大阪府\n関西")
+scales::demo_discrete(tiiki)
+scales::demo_discrete(tiiki, labels = label_vertical(line_feed = "\n"))
+```
+
 ## Imports packages
 
 * `{purrr}`

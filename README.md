@@ -470,12 +470,7 @@ already installed, or only those that are yet uninstalled.
 package.list <- Rtools.pacman.package.list()
 # It's too long, so show part of it in head()
 head(package.list)
-#> [1] "mingw32 mingw-w64-i686-3proxy 0.9.4-1"               
-#> [2] "mingw32 mingw-w64-i686-4th 3.62.5-1"                 
-#> [3] "mingw32 mingw-w64-i686-FAudio 22.04-1"               
-#> [4] "mingw32 mingw-w64-i686-MinHook 1.3.3-2"              
-#> [5] "mingw32 mingw-w64-i686-OpenSceneGraph 3.6.5-10"      
-#> [6] "mingw32 mingw-w64-i686-OpenSceneGraph-debug 3.6.5-10"
+#> character(0)
 ```
 
 `Rtools.pacman.package.list()` is a function that displays a list of
@@ -485,14 +480,11 @@ return NA.
 
 ``` r
 package.list.curl <- Rtools.pacman.package.find("curl")
+#> Warning in Rtools.pacman.package.find("curl"): You may not have pacman installed
+#> since Rtools40.
 # It's too long, so show part of it in head()
 head(package.list.curl)
-#> [1] "mingw32/mingw-w64-i686-curl 7.83.1-1"         
-#> [2] "mingw32/mingw-w64-i686-curl-gnutls 7.83.1-1"  
-#> [3] "mingw32/mingw-w64-i686-curl-winssl 7.83.1-1"  
-#> [4] "mingw32/mingw-w64-i686-flickcurl 1.26-5"      
-#> [5] "mingw32/mingw-w64-i686-python-pycurl 7.45.1-1"
-#> [6] "mingw64/mingw-w64-x86_64-curl 7.83.1-1"
+#> [1] NA
 ```
 
 ### `scale.data.frame()`
@@ -809,6 +801,26 @@ scales::demo_discrete(touhoku, labels = label_vertical())
 ```
 
 <img src="man/figures/README-unnamed-chunk-27-2.png" width="100%" />
+
+The function to express line breaks when the text consists only of
+Japanese has been provided, but there is a possibility of misalignment
+when half-width characters are included or when proportional fonts are
+used.
+
+``` r
+tiiki <- c("秋田県\n東北", "東京都\n関東", "大阪府\n関西")
+scales::demo_discrete(tiiki)
+#> scale_x_discrete()
+```
+
+<img src="man/figures/README-unnamed-chunk-28-1.png" width="100%" />
+
+``` r
+scales::demo_discrete(tiiki, labels = label_vertical(line_feed = "\n"))
+#> scale_x_discrete(labels = label_vertical(line_feed = "\n"))
+```
+
+<img src="man/figures/README-unnamed-chunk-28-2.png" width="100%" />
 
 ## Imports packages
 
