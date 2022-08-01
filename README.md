@@ -822,6 +822,49 @@ scales::demo_discrete(tiiki, labels = label_vertical(line_feed = "\n"))
 
 <img src="man/figures/README-unnamed-chunk-28-2.png" width="100%" />
 
+### `mode_()` and `mode_data.farme()`
+
+`mode()` is function to calculate the mode and frequency given a vector
+or a data frame.
+
+``` r
+mode_(iris["Sepal.Length"])
+#>   Sepal.Length Freq
+#> 8            5   10
+```
+
+If multiple columns of data frames are given, the most frequent
+combination of combinations and frequencies is computed.
+
+Large data frames cannot be calculated properly.
+
+``` r
+mode_(iris[c(1, 5)])
+#>   Sepal.Length Species Freq
+#> 8            5  setosa    8
+#> 9          5.1  setosa    8
+```
+
+`mode_data.frame()` calculate the mode frequency for each column of the
+data frame.
+
+The result is in the form of a data frame that returns answers in the
+form of column name, mode, and frequency. More than one answer may be
+returned for a column as the mode may not be uniquely obtained.
+
+``` r
+mode_data.frame(iris)
+#>       colnames      value Freq
+#> 1 Sepal.Length          5   10
+#> 2  Sepal.Width          3   26
+#> 3 Petal.Length        1.4   13
+#> 4 Petal.Length        1.5   13
+#> 5  Petal.Width        0.2   29
+#> 6      Species     setosa   50
+#> 7      Species versicolor   50
+#> 8      Species  virginica   50
+```
+
 ## Imports packages
 
 -   `{purrr}`
