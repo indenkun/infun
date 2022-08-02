@@ -470,7 +470,6 @@ already installed, or only those that are yet uninstalled.
 package.list <- Rtools.pacman.package.list()
 # It's too long, so show part of it in head()
 head(package.list)
-#> character(0)
 ```
 
 `Rtools.pacman.package.list()` is a function that displays a list of
@@ -480,11 +479,8 @@ return NA.
 
 ``` r
 package.list.curl <- Rtools.pacman.package.find("curl")
-#> Warning in Rtools.pacman.package.find("curl"): You may not have pacman installed
-#> since Rtools40.
 # It's too long, so show part of it in head()
 head(package.list.curl)
-#> [1] NA
 ```
 
 ### `scale.data.frame()`
@@ -793,14 +789,14 @@ scales::demo_discrete(touhoku)
 #> scale_x_discrete()
 ```
 
-<img src="man/figures/README-unnamed-chunk-27-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-25-1.png" width="100%" />
 
 ``` r
 scales::demo_discrete(touhoku, labels = label_vertical())
 #> scale_x_discrete(labels = label_vertical())
 ```
 
-<img src="man/figures/README-unnamed-chunk-27-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-25-2.png" width="100%" />
 
 The function to express line breaks when the text consists only of
 Japanese has been provided, but there is a possibility of misalignment
@@ -813,14 +809,14 @@ scales::demo_discrete(tiiki)
 #> scale_x_discrete()
 ```
 
-<img src="man/figures/README-unnamed-chunk-28-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
 
 ``` r
 scales::demo_discrete(tiiki, labels = label_vertical(line_feed = "\n"))
 #> scale_x_discrete(labels = label_vertical(line_feed = "\n"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-28-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-26-2.png" width="100%" />
 
 ### `mode_()` and `mode_data.farme()`
 
@@ -830,7 +826,7 @@ or a data frame.
 ``` r
 mode_(iris["Sepal.Length"])
 #>   Sepal.Length Freq
-#> 8            5   10
+#> 1            5   10
 ```
 
 If multiple columns of data frames are given, the most frequent
@@ -841,8 +837,8 @@ Large data frames cannot be calculated properly.
 ``` r
 mode_(iris[c(1, 5)])
 #>   Sepal.Length Species Freq
-#> 8            5  setosa    8
-#> 9          5.1  setosa    8
+#> 1            5  setosa    8
+#> 2          5.1  setosa    8
 ```
 
 `mode_data.frame()` calculate the mode frequency for each column of the

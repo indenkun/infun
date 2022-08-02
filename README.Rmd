@@ -228,7 +228,7 @@ You may not be able to use the functions in Rtools42(on R 4.2.x). Please configu
 
 `Rtools.pacman.package.list()` is a function that outputs a list of packages that can be installed by Rtools pacman from repository. By specifying arguments, you can extract only those packages that are already installed, or only those that are yet uninstalled.
 
-```{r}
+```r
 package.list <- Rtools.pacman.package.list()
 # It's too long, so show part of it in head()
 head(package.list)
@@ -236,7 +236,7 @@ head(package.list)
 
 `Rtools.pacman.package.list()` is a function that displays a list of packages that can be installed by pacman in Rtools from repository with the specified arguments in the string. If no matching package is found, return NA.
 
-```{r}
+```r
 package.list.curl <- Rtools.pacman.package.find("curl")
 # It's too long, so show part of it in head()
 head(package.list.curl)

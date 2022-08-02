@@ -38,5 +38,7 @@ mode_ <- function(...){
   d <- table(...)
   d <- data.frame(d)
   freqcol <- colnames(d)[length(colnames(d))]
-  d[d[freqcol] == max(d[freqcol]),]
+  res <- d[d[freqcol] == max(d[freqcol]),]
+  rownames(res) <- NULL
+  res
 }
