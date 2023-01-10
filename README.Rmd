@@ -483,6 +483,16 @@ More than one answer may be returned for a column as the mode may not be uniquel
 mode_data.frame(iris)
 ```
 
+### `dummy_code()`
+
+Given a variable x with n distinct values, create n new dummy coded variables coded 0/1 for presence (1) or absence (0) of each variable.
+
+This function can be used to create a dummy code by splitting a single value into multiple values separated by commas or other delimiters by specifying any delimiter character.
+
+```{r}
+df_sample <- data.frame(sample = c("a,b", "b", "c", "c,a", "a,b,c"))
+dummy_code(df_sample$sample, split = ",")
+```
 
 ## Imports packages
 

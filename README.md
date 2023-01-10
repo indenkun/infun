@@ -861,18 +861,38 @@ mode_data.frame(iris)
 #> 8      Species  virginica   50
 ```
 
+### `dummy_code()`
+
+Given a variable x with n distinct values, create n new dummy coded
+variables coded 0/1 for presence (1) or absence (0) of each variable.
+
+This function can be used to create a dummy code by splitting a single
+value into multiple values separated by commas or other delimiters by
+specifying any delimiter character.
+
+``` r
+df_sample <- data.frame(sample = c("a,b", "b", "c", "c,a", "a,b,c"))
+dummy_code(df_sample$sample, split = ",")
+#>   a b c
+#> 1 1 1 0
+#> 2 0 1 0
+#> 3 0 0 1
+#> 4 1 0 1
+#> 5 1 1 1
+```
+
 ## Imports packages
 
--   `{purrr}`
--   `{stats}`
+- `{purrr}`
+- `{stats}`
 
 ## Suggests packages
 
--   `{gtsummary}`
--   `{flextable}`
--   `{tools}`
--   `{lubridate}`
--   `{dplyr}`
+- `{gtsummary}`
+- `{flextable}`
+- `{tools}`
+- `{lubridate}`
+- `{dplyr}`
 
 ## License
 
@@ -880,5 +900,5 @@ MIT.
 
 ## Notice
 
--   The email address listed in the DESCRIPTION is a dummy. If you have
-    any questions, please post them on ISSUE.
+- The email address listed in the DESCRIPTION is a dummy. If you have
+  any questions, please post them on ISSUE.
