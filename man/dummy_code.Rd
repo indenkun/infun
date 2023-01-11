@@ -4,12 +4,14 @@
 \alias{dummy_code}
 \title{Create dummy coded variables}
 \usage{
-dummy_code(x, split, prefix = NULL, suffix = NULL, ...)
+dummy_code(x, split, variables = NULL, prefix = NULL, suffix = NULL, ...)
 }
 \arguments{
 \item{x}{a vector or one column of data frame to be transformed into dummy codes}
 
 \item{split}{a character (or object which can be coerced to such) containing regular expression to use for splitting. If empty matches occur, in particular if split has length 0, x is split into single characters.}
+
+\item{variables}{a vector, The default is NULL, which refers to x and estimates the specified value, but if specified it checks and applies to the variable.}
 
 \item{prefix}{a String to be prefix to the column name in the dummy code data frame}
 
@@ -29,4 +31,7 @@ df_sample <- data.frame(sample = c("a,b", "b", "c", "c,a", "a,b,c"))
 (df_dummy <- dummy_code(df_sample$sample, split = ","))
 new_df <- cbind(df_sample, df_dummy)
 new_df
+(df_dummy_v <- dummy_code(df_sample$sample, split = ",", variables = c("a", "b", "c", "d")))
+new_df_v <- cbind(df_sample, df_dummy_v)
+new_df_v
 }
