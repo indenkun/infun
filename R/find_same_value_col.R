@@ -23,11 +23,10 @@ find.same.value.col <- function(data, col.name = c("number", "name")){
   if(col.name == "name") names(same.value.col.list) <- names(data)
 
   for(i in 1:ncol(data)){
-    same.value.col.number <- NULL
     for(k in 1:ncol(data))
       if(all(data[i] == data[k]) && i != k){
-        if(col.name == "number") same.value.col.list[i] <- c(same.value.col.number, k)
-        else same.value.col.list[i] <- c(same.value.col.number, names(data)[k])
+        if(col.name == "number") same.value.col.list[[i]] <- c(same.value.col.list[[i]], k)
+        else same.value.col.list[[i]] <- c(same.value.col.list[[i]], names(data)[k])
       }
   }
 
