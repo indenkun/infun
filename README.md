@@ -881,6 +881,33 @@ dummy_code(df_sample$sample, split = ",")
 #> 5 1 1 1
 ```
 
+### `replace_match()`
+
+Function to replace a value that exactly matches a pattern with a
+replacement. Given a vector of equal length for pattern and replacement,
+the first value of pattern is interpreted as replacing the first value
+of replacement. This means that a large number of patterns and
+replacements can be specified in a vector.
+
+``` r
+pref_list <- c("あきた", "秋田", "秋田県", "あき田", "秋た", "東京都")
+pattern <- c("あきた", "秋田", "あき田", "秋た")
+replacement <- c("秋田県", "秋田県", "秋田県", "秋田県")
+replace_match(pref_list, pattern = pattern, replacement = replacement)
+#> [1] "秋田県" "秋田県" "秋田県" "秋田県" "秋田県" "東京都"
+```
+
+If a value is specified for the `nomatch` argument, any value that does
+not match the pattern and is not substituted is returned; if `nomatch`
+is not specified, the original value is output.
+
+``` r
+replace_match(pref_list, pattern = pattern, replacement = replacement, nomatch = NA_character_)
+#> [1] "秋田県" "秋田県" NA       "秋田県" "秋田県" NA
+replace_match(pref_list, pattern = pattern, replacement = replacement, nomatch = "変換不要")
+#> [1] "秋田県"   "秋田県"   "変換不要" "秋田県"   "秋田県"   "変換不要"
+```
+
 ## Imports packages
 
 - `{purrr}`
