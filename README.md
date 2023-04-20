@@ -908,6 +908,30 @@ replace_match(pref_list, pattern = pattern, replacement = replacement, nomatch =
 #> [1] "秋田県"   "秋田県"   "変換不要" "秋田県"   "秋田県"   "変換不要"
 ```
 
+### `na.omit_select()`
+
+If NA is present in a selected column in the data frame, returns a data
+frame with the rows containing NA in that column removed if the default
+is the case. If `.retrieve = FALSE` is specified, only rows with NA in
+the chosen column are returned.
+
+Multiple columns may be specified as the columns to be selected.
+
+``` r
+example_data <- data.frame(value1 = c(1, 2, NA, NA, 10),
+                           value2 = c(1, NA, 3:5),
+                           value3 = c(NA, 1, 2, NA, 10))
+na.omit_select(example_data, value2, value3)
+#>   value1 value2 value3
+#> 3     NA      3      2
+#> 5     10      5     10
+na.omit_select(example_data, value2, value3, .retrieve = FALSE)
+#>   value1 value2 value3
+#> 1      1      1     NA
+#> 2      2     NA      1
+#> 4     NA      4     NA
+```
+
 ## Imports packages
 
 - `{purrr}`
