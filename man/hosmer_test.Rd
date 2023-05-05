@@ -12,7 +12,7 @@ hosmer_test(model, g = 10)
 \item{g}{numeric, the number for how many subgroups the data should be divided into.}
 }
 \description{
-Hosmer-Lemeshow Goodness of Fit (GOF) Test to check model quality of logistic regression models.
+Hosmer-Lemeshow Goodness of Fit (GOF) Test is to check model quality of logistic regression models.
 Note that this function has a unique way of dividing subgroups. See details.
 }
 \details{
