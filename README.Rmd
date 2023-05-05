@@ -528,6 +528,28 @@ na.omit_select(example_data, value2, value3)
 na.omit_select(example_data, value2, value3, .retrieve = FALSE)
 ```
 
+### `hosmer_test()`
+
+Hosmer-Lemeshow Goodness of Fit (GOF) Test is to check model quality of logistic regression models.
+
+The Hosmer-Lemeshow Goodness of Fit (GOF) Test is a method for obtaining statistics by dividing observed and expected values into several arbitrary subgroups.
+The method of dividing the observed and expected values into subgroups is generally based on the quantile of the expected value, for example, by taking a decile of the expected value.
+This method is used in the `hoslem.test()` function of the `{resouceselection}` package and the `performance_hosmer()` function of the `{performance}` package.
+
+However, there are several variations on how to divide the subgroups, and **this function uses a method in which the expected values are ordered from smallest to largest so that each subgroup has the same number of samples.**
+
+```{r}
+data("Titanic")
+df <- data.frame(Titanic)
+df <- data.frame(Class = rep(df$Class, df$Freq),
+                 Sex = rep(df$Sex, df$Freq),
+                 Age = rep(df$Age, df$Freq),
+                 Survived = rep(df$Survived, df$Freq))
+model <- glm(Survived ~ . ,data = df, family = binomial())
+hosmer_test(model)
+```
+
+
 ## Imports packages
 
 * `{purrr}`
