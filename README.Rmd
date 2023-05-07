@@ -536,7 +536,9 @@ The Hosmer-Lemeshow Goodness of Fit (GOF) Test is a method for obtaining statist
 The method of dividing the observed and expected values into subgroups is generally based on the quantile of the expected value, for example, by taking a decile of the expected value.
 This method is used in the `hoslem.test()` function of the `{resouceselection}` package and the `performance_hosmer()` function of the `{performance}` package.
 
-However, there are several variations on how to divide the subgroups, and **this function uses a method in which the expected values are ordered from smallest to largest so that each subgroup has the same number of samples.**
+However, there are several variations on how to divide the subgroups, and **this function uses a method in which the expected values are ordered from smallest to largest so that each subgroup has the same number of samples as possible.**
+
+The division of subgroups when simple is TRUE and when FALSE is different. See Detail in the documentation for details.
 
 ```{r}
 data("Titanic")
@@ -546,7 +548,8 @@ df <- data.frame(Class = rep(df$Class, df$Freq),
                  Age = rep(df$Age, df$Freq),
                  Survived = rep(df$Survived, df$Freq))
 model <- glm(Survived ~ . ,data = df, family = binomial())
-hosmer_test(model)
+hosmer_test(model, simple = TRUE)
+hosmer_test(model, simple = FALSE)
 ```
 
 

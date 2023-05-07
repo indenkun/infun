@@ -949,7 +949,10 @@ the `{performance}` package.
 However, there are several variations on how to divide the subgroups,
 and **this function uses a method in which the expected values are
 ordered from smallest to largest so that each subgroup has the same
-number of samples.**
+number of samples as possible.**
+
+The division of subgroups when simple is TRUE and when FALSE is
+different. See Detail in the documentation for details.
 
 ``` r
 data("Titanic")
@@ -959,12 +962,18 @@ df <- data.frame(Class = rep(df$Class, df$Freq),
                  Age = rep(df$Age, df$Freq),
                  Survived = rep(df$Survived, df$Freq))
 model <- glm(Survived ~ . ,data = df, family = binomial())
-hosmer_test(model)
+hosmer_test(model, simple = TRUE)
 #> 
-#>  Hosmer and Lemeshow goodness of fit (GOF) test
+#>  Hosmer and Lemeshow goodness of fit test
 #> 
 #> data:  glm(formula = Survived ~ ., family = binomial(), data = df)
 #> X-squared = 691.53, df = 8, p-value < 2.2e-16
+hosmer_test(model, simple = FALSE)
+#> 
+#>  Hosmer and Lemeshow goodness of fit test
+#> 
+#> data:  glm(formula = Survived ~ ., family = binomial(), data = df)
+#> X-squared = 82.909, df = 8, p-value = 1.266e-14
 ```
 
 ## Imports packages
