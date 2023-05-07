@@ -55,9 +55,9 @@ hosmer_test <- function(model, g = 10, simple = FALSE){
   out <- out[order(out$fitted.values, out$y, decreasing = FALSE),]
   if(simple){
     step_by <- nrow(out) / g
-    bin_step <- round(seq(step_by, nrow(out), step_by))
-    n_step <- c(bin_step[1], bin_step[-1] - bin_step[1:(length(bin_step) - 1)])
-    out$bin <- unlist(mapply(function(x, y) rep(x, y),
+    subgroup_step <- round(seq(step_by, nrow(out), step_by))
+    n_step <- c(subgroup_step[1], subgroup_step[-1] - subgroup_step[1:(length(subgroup_step) - 1)])
+    out$subgroup <- unlist(mapply(function(x, y) rep(x, y),
                              1:length(n_step),
                              n_step,
                              SIMPLIFY = FALSE))
@@ -68,7 +68,7 @@ hosmer_test <- function(model, g = 10, simple = FALSE){
       stop("Cannot be calculated because the unique value of expected value is less than the number of groups specified.")
     else if(fitted.values_uni_len == g){
       fitted.values_uni_n <- sapply(fitted.values_uni, function(x) sum(out$fitted.values == x))
-      out$bin <- unlist(mapply(function(x, y) rep(x, y),
+      out$subgroup <- unlist(mapply(function(x, y) rep(x, y),
                                fitted.values_uni,
                                fitted.values_uni_n,
                                SIMPLIFY = FALSE))
@@ -76,24 +76,24 @@ hosmer_test <- function(model, g = 10, simple = FALSE){
       fitted.values_uni_n <- sapply(fitted.values_uni, function(x) sum(out$fitted.values == x))
       n_step <- vec_g(fitted.values_uni_n, g = g)
 
-      out$bin <- unlist(mapply(function(x, y) rep(x, y),
+      out$subgroup <- unlist(mapply(function(x, y) rep(x, y),
                                1:length(n_step),
                                n_step,
                                SIMPLIFY = FALSE))
 
-      bin_names <- sapply(1:length(n_step), function(x){
-        bin_vec <- out$fitted.values[out$bin == x]
-        bin_vec_min <- round(min(bin_vec), 3)
-        bin_vec_max <- round(max(bin_vec), 3)
-        if(bin_vec_min == bin_vec_max) bin_vec_min
-        else paste(bin_vec_min, "-", bin_vec_max)
+      subgroup_names <- sapply(1:length(n_step), function(x){
+        subgroup_vec <- out$fitted.values[out$subgroup == x]
+        subgroup_vec_min <- round(min(subgroup_vec), 3)
+        subgroup_vec_max <- round(max(subgroup_vec), 3)
+        if(subgroup_vec_min == subgroup_vec_max) subgroup_vec_min
+        else paste(subgroup_vec_min, "-", subgroup_vec_max)
       })
 
-      out$bin <- replace_match(out$bin, 1:length(n_step), bin_names)
+      out$subgroup <- replace_match(out$subgroup, 1:length(n_step), subgroup_names)
     }
   }
-  obs <- stats::xtabs(cbind(1 - y, y) ~ bin, data = out)
-  expect <- stats::xtabs(cbind(1 - fitted.values, fitted.values) ~ bin, data = out)
+  obs <- stats::xtabs(cbind(y0_obs = 1 - y, y1_obs = y) ~ subgroup, data = out)
+  expect <- stats::xtabs(cbind(y0_expect = 1 - fitted.values, y1_expect = fitted.values) ~ subgroup, data = out)
   chisq <- sum((obs - expect)^2 / expect)
   p.value <- 1 - stats::pchisq(chisq, df)
 
