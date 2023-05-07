@@ -42,6 +42,8 @@ If simple is TRUE, the process simply divides the expected values in decreasing 
 
 If simple is FALSE, the same expected values are included in the same subgroup, and the calculation is performed with the number of subgroups adjusted so that the minimum number of values in a subgroup is maximized and the variance of the number of values in each group is minimized.
 In other words, it strives to keep the same number of values in the subgroups as much as possible, while ensuring that the same expected values are in the same subgroups.
+In this algorithm, the subgroup with the smallest number of expected values in the initial disjoint state is merged with its neighboring subgroups (with smaller or larger expected values) and the one with the smaller variance is adopted to create a new subgroup, and then the subgroup with the smallest number of expected values is merged with its neighboring expected value subgroups and the one with the smaller variance is adopted to create a new subgroup, and so on. The next subgroup with the lowest number of expected values is merged with the subgroup with the lowest variance, and the one with the lowest variance is adopted to create a new subgroup.
+This procedure will result in a homogeneous number of subgroups as expected when the expected number of subgroups are relatively disparate, but will not create the expected number of subgroups when the expected number of subgroups are nearly homogeneous (e.g., only 1 or 2 of each).
 }
 \examples{
 data("Titanic")
