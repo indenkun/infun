@@ -7,6 +7,8 @@
 #' @param simple logical, If TRUE is selected, the expected values in decreasing order are evenly divided by the number of subgroups specified.
 #'  if FALSE, identical expected values are placed in identical subgroups, and the number of subgroups is adjusted to make each subgroup as homogeneous as possible.
 #'  See Detail for details.
+#' @param exact If \code{excat} is TRUE, the number of pieces in each group is adjusted to minimize the variance among all combinations, i.e., to make the numbers as equal as possible.
+#'  If FALSE, it pseudo-strives to minimize the variance of the number of pieces in each group, but prioritizes calculation speed and does not perform calculations from all combinations.
 #' @details
 #' The Hosmer-Lemeshow Goodness of Fit Test is a method for obtaining statistics by dividing observed and expected values into several arbitrary subgroups.
 #' The method of dividing the observed and expected values into subgroups is generally based on the quantile of the expected value, for example, by taking a decile of the expected value.
@@ -21,6 +23,9 @@
 #' In other words, it strives to keep the same number of values in the subgroups as much as possible, while ensuring that the same expected values are in the same subgroups.
 #' In this algorithm, the subgroup with the smallest number of expected values in the initial disjoint state is merged with its neighboring subgroups (with smaller or larger expected values) and the one with the smaller variance is adopted to create a new subgroup, and then the subgroup with the smallest number of expected values is merged with its neighboring expected value subgroups and the one with the smaller variance is adopted to create a new subgroup, and so on. The next subgroup with the lowest number of expected values is merged with the subgroup with the lowest variance, and the one with the lowest variance is adopted to create a new subgroup.
 #' This procedure will result in a homogeneous number of subgroups as expected when the expected number of subgroups are relatively disparate, but will not create the expected number of subgroups when the expected number of subgroups are nearly homogeneous (e.g., only 1 or 2 of each).
+#'
+#' However, this algorithm may not minimize the variance.
+#' For this reason, we can set EXACT to TRUE with the value calculated by brute force. However, this would require a large amount of computation and may consume a large amount of memory and slow down the process until the result is obtained.
 #' @returns
 #' A list with class "\code{htest}" containing the following components:
 #'
@@ -47,7 +52,7 @@
 #' hosmer_test(model)
 #' @export
 
-hosmer_test <- function(model, g = 10, simple = FALSE){
+hosmer_test <- function(model, g = 10, simple = FALSE, exact = FALSE){
 
   df <- g - 2
   out <- cbind.data.frame(y = model$y,
@@ -74,7 +79,9 @@ hosmer_test <- function(model, g = 10, simple = FALSE){
                                SIMPLIFY = FALSE))
     }else{
       fitted.values_uni_n <- sapply(fitted.values_uni, function(x) sum(out$fitted.values == x))
-      n_step <- vec_g(fitted.values_uni_n, g = g)
+
+      if(exact) n_step <- vec_n(fitted.values_uni_n, g = g)
+      else n_step <- vec_g(fitted.values_uni_n, g = g)
 
       out$subgroup <- unlist(mapply(function(x, y) rep(x, y),
                                1:length(n_step),
@@ -114,6 +121,8 @@ hosmer_test <- function(model, g = 10, simple = FALSE){
 #'
 
 vec_g <- function(x, g){
+  if(g <= 3) stop("If g is less than 3, it cannot be calculated well.")
+
   ans <- x
   ans_len <- length(ans)
   while (ans_len > g){
@@ -148,6 +157,38 @@ vec_g <- function(x, g){
     })
     ans <- unlist(unname(ans_list[which.min(lapply(ans_list, var))]))
     ans_len <- length(ans)
+  }
+  ans
+}
+
+#'
+
+vec_n <- function(x, g){
+  if(g <= 3) stop("If g is less than 3, it cannot be calculated well.")
+
+  vec_add <- function(x){
+    lapply(1:(length(x) - 1), function(a){
+      if(a == 1) c(x[1] + x[2], x[3:length(x)])
+      else if(a + 2 == length(x)) c(x[1:(a - 1)], x[a] + x[a + 1], x[a + 2])
+      else if(a + 1 == length(x)) c(x[1:(a - 1)], x[a] + x[a + 1])
+      else if(a == 2) c(x[1], x[2] + x[3], x[4:length(x)])
+      else c(x[1:(a - 1)], x[a] + x[a + 1], x[(a + 2):length(x)])
+    })
+  }
+
+  ans <- list(x)
+  while(length(ans[[1]]) > g){
+    ans <- lapply(ans, vec_add)
+    ans <- unique(purrr::list_flatten(ans))
+  }
+
+  ans_n <- sapply(ans, var)
+  if(length(ans_n) == 1) ans <- unlist(ans[ans_n])
+  else if(length(min(ans_n)) == 1) ans <- unlist(ans[which.min(ans_n)])
+  else{
+    ans <- ans[ans_n == min(ans_n)]
+    ans_n <- sapply(ans, min)
+    ans <- unlist(ans[which.max(ans_n)])
   }
   ans
 }

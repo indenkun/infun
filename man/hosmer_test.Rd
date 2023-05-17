@@ -4,7 +4,7 @@
 \alias{hosmer_test}
 \title{Hosmer-Lemeshow Goodness of Fit Test}
 \usage{
-hosmer_test(model, g = 10, simple = FALSE)
+hosmer_test(model, g = 10, simple = FALSE, exact = FALSE)
 }
 \arguments{
 \item{model}{a \code{glm} -object with binomial-family.}
@@ -14,6 +14,9 @@ hosmer_test(model, g = 10, simple = FALSE)
 \item{simple}{logical, If TRUE is selected, the expected values in decreasing order are evenly divided by the number of subgroups specified.
 if FALSE, identical expected values are placed in identical subgroups, and the number of subgroups is adjusted to make each subgroup as homogeneous as possible.
 See Detail for details.}
+
+\item{exact}{If \code{excat} is TRUE, the number of pieces in each group is adjusted to minimize the variance among all combinations, i.e., to make the numbers as equal as possible.
+If FALSE, it pseudo-strives to minimize the variance of the number of pieces in each group, but prioritizes calculation speed and does not perform calculations from all combinations.}
 }
 \value{
 A list with class "\code{htest}" containing the following components:
@@ -44,6 +47,9 @@ If simple is FALSE, the same expected values are included in the same subgroup, 
 In other words, it strives to keep the same number of values in the subgroups as much as possible, while ensuring that the same expected values are in the same subgroups.
 In this algorithm, the subgroup with the smallest number of expected values in the initial disjoint state is merged with its neighboring subgroups (with smaller or larger expected values) and the one with the smaller variance is adopted to create a new subgroup, and then the subgroup with the smallest number of expected values is merged with its neighboring expected value subgroups and the one with the smaller variance is adopted to create a new subgroup, and so on. The next subgroup with the lowest number of expected values is merged with the subgroup with the lowest variance, and the one with the lowest variance is adopted to create a new subgroup.
 This procedure will result in a homogeneous number of subgroups as expected when the expected number of subgroups are relatively disparate, but will not create the expected number of subgroups when the expected number of subgroups are nearly homogeneous (e.g., only 1 or 2 of each).
+
+However, this algorithm may not minimize the variance.
+For this reason, we can set EXACT to TRUE with the value calculated by brute force. However, this would require a large amount of computation and may consume a large amount of memory and slow down the process until the result is obtained.
 }
 \examples{
 data("Titanic")
