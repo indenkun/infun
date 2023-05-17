@@ -39,7 +39,7 @@
 #'
 #' @references
 #' David W. Hosmer, Stanley Lemesbow (1980). Goodness of fit tests for the multiple logistic regression model, Communications in Statistics - Theory and Methods, 9:10, 1043-1069, \doi{10.1080/03610928008827941}
-#' 
+#'
 #' HOSMER, D.W., HOSMER, T., LE CESSIE, S. and LEMESHOW, S. (1997), A COMPARISON OF GOODNESS-OF-FIT TESTS FOR THE LOGISTIC REGRESSION MODEL. Statist. Med., 16: 965-980. \doi{10.1002/(SICI)1097-0258(19970515)16:9<965::AID-SIM509>3.0.CO;2-O}
 #'
 #' @examples
@@ -78,6 +78,7 @@ hosmer_test <- function(model, g = 10, simple = FALSE, exact = FALSE){
                                fitted.values_uni,
                                fitted.values_uni_n,
                                SIMPLIFY = FALSE))
+      if(length(unique(round(out$subgroup, 3))) == length(unique(out$subgroup))) out$subgroup <- round(out$subgroup, 3)
     }else{
       fitted.values_uni_n <- sapply(fitted.values_uni, function(x) sum(out$fitted.values == x))
 
