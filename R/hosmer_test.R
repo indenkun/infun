@@ -4,11 +4,11 @@
 #' Note that this function has a unique way of dividing subgroups. See details.
 #' @param model a \code{glm} -object with binomial-family.
 #' @param g numeric, the number for how many subgroups the data should be divided into.
-#' @param simple logical, If TRUE is selected, the expected values in decreasing order are evenly divided by the number of subgroups specified.
-#'  if FALSE, identical expected values are placed in identical subgroups, and the number of subgroups is adjusted to make each subgroup as homogeneous as possible.
+#' @param simple logical, If \code{TRUE} is selected, the expected values in decreasing order are evenly divided by the number of subgroups specified.
+#'  if \code{FALSE}, identical expected values are placed in identical subgroups, and the number of subgroups is adjusted to make each subgroup as homogeneous as possible.
 #'  See Detail for details.
-#' @param exact If \code{excat} is TRUE, the number of pieces in each group is adjusted to minimize the variance among all combinations, i.e., to make the numbers as equal as possible.
-#'  If FALSE, it pseudo-strives to minimize the variance of the number of pieces in each group, but prioritizes calculation speed and does not perform calculations from all combinations.
+#' @param force If \code{excat} is \code{TRUE}, then the total number of combinations is calculated to minimize the variance among all combinations and the combination with the lowest variance is selected among them. In other words, adjust the number of pieces in each group so that the numbers are as equal as possible.
+#'  If \code{FALSE}, it pseudo-strives to minimize the variance of the number of pieces in each group, but prioritizes calculation speed and does not perform calculations from all combinations.
 #' @details
 #' The Hosmer-Lemeshow Goodness of Fit Test is a method for obtaining statistics by dividing observed and expected values into several arbitrary subgroups.
 #' The method of dividing the observed and expected values into subgroups is generally based on the quantile of the expected value, for example, by taking a decile of the expected value.
@@ -25,7 +25,7 @@
 #' This procedure will result in a homogeneous number of subgroups as expected when the expected number of subgroups are relatively disparate, but will not create the expected number of subgroups when the expected number of subgroups are nearly homogeneous (e.g., only 1 or 2 of each).
 #'
 #' However, this algorithm may not minimize the variance.
-#' For this reason, we can set EXACT to TRUE with the value calculated by brute force. However, this would require a large amount of computation and may consume a large amount of memory and slow down the process until the result is obtained.
+#' For this reason, we can set \code{force} to \code{TRUE} with the value calculated by brute force. However, this would require a large amount of computation and may consume a large amount of memory and slow down the process until the result is obtained.
 #' @returns
 #' A list with class "\code{htest}" containing the following components:
 #'
@@ -53,7 +53,7 @@
 #' hosmer_test(model)
 #' @export
 
-hosmer_test <- function(model, g = 10, simple = FALSE, exact = FALSE){
+hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
 
   df <- g - 2
   out <- cbind.data.frame(y = model$y,
@@ -82,7 +82,7 @@ hosmer_test <- function(model, g = 10, simple = FALSE, exact = FALSE){
     }else{
       fitted.values_uni_n <- sapply(fitted.values_uni, function(x) sum(out$fitted.values == x))
 
-      if(exact) n_step <- vec_n(fitted.values_uni_n, g = g)
+      if(force) n_step <- vec_n(fitted.values_uni_n, g = g)
       else n_step <- vec_g(fitted.values_uni_n, g = g)
 
       out$subgroup <- unlist(mapply(function(x, y) rep(x, y),

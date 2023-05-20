@@ -4,19 +4,19 @@
 \alias{hosmer_test}
 \title{Hosmer-Lemeshow Goodness of Fit Test}
 \usage{
-hosmer_test(model, g = 10, simple = FALSE, exact = FALSE)
+hosmer_test(model, g = 10, simple = FALSE, force = FALSE)
 }
 \arguments{
 \item{model}{a \code{glm} -object with binomial-family.}
 
 \item{g}{numeric, the number for how many subgroups the data should be divided into.}
 
-\item{simple}{logical, If TRUE is selected, the expected values in decreasing order are evenly divided by the number of subgroups specified.
-if FALSE, identical expected values are placed in identical subgroups, and the number of subgroups is adjusted to make each subgroup as homogeneous as possible.
+\item{simple}{logical, If \code{TRUE} is selected, the expected values in decreasing order are evenly divided by the number of subgroups specified.
+if \code{FALSE}, identical expected values are placed in identical subgroups, and the number of subgroups is adjusted to make each subgroup as homogeneous as possible.
 See Detail for details.}
 
-\item{exact}{If \code{excat} is TRUE, the number of pieces in each group is adjusted to minimize the variance among all combinations, i.e., to make the numbers as equal as possible.
-If FALSE, it pseudo-strives to minimize the variance of the number of pieces in each group, but prioritizes calculation speed and does not perform calculations from all combinations.}
+\item{force}{If \code{excat} is \code{TRUE}, then the total number of combinations is calculated to minimize the variance among all combinations and the combination with the lowest variance is selected among them. In other words, adjust the number of pieces in each group so that the numbers are as equal as possible.
+If \code{FALSE}, it pseudo-strives to minimize the variance of the number of pieces in each group, but prioritizes calculation speed and does not perform calculations from all combinations.}
 }
 \value{
 A list with class "\code{htest}" containing the following components:
@@ -49,7 +49,7 @@ In this algorithm, the subgroup with the smallest number of expected values in t
 This procedure will result in a homogeneous number of subgroups as expected when the expected number of subgroups are relatively disparate, but will not create the expected number of subgroups when the expected number of subgroups are nearly homogeneous (e.g., only 1 or 2 of each).
 
 However, this algorithm may not minimize the variance.
-For this reason, we can set EXACT to TRUE with the value calculated by brute force. However, this would require a large amount of computation and may consume a large amount of memory and slow down the process until the result is obtained.
+For this reason, we can set \code{force} to \code{TRUE} with the value calculated by brute force. However, this would require a large amount of computation and may consume a large amount of memory and slow down the process until the result is obtained.
 }
 \examples{
 data("Titanic")
