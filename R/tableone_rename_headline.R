@@ -21,7 +21,7 @@ tableone.rename.overall <- function(x, rename.str){
     return(NA)
   }
 
-  if(class(x) != "TableOne"){
+  if(!inherits(x, "TableOne")){
     warning("The class is not TableOne, so it cannot be handled.")
   }else{
     if(names(x[["ContTable"]])[1] != "Overall" || names(x[["CatTable"]])[1] != "Overall"){
@@ -44,20 +44,20 @@ tableone.rename.overall <- function(x, rename.str){
 
 tableone.rename.headline <- function(x, rename.headline){
 
-  if(class(x) != "TableOne"){
+  if(!inherits(x, "TableOne")){
     warning("The class is not TableOne, so it cannot be handled.")
-  }else if(class(rename.headline) != "list" && class(rename.headline) != "formula"){
+  }else if(!inherits(rename.headline, c("list", "formula"))){
     warning("The name of the heading you want to change should be specified before and after the change in the 'formula'.")
-  }else if(class(rename.headline) == "list" && !all(sapply(rename.headline, function(x) class(x)) %in% "formula")){
+  }else if(inherits(rename.headline, "list") && !all(sapply(rename.headline, function(x) inherits(x, "formula")))){
     warning("The name of the heading you want to change should be in the 'list' format, with the before and after values specified in the 'formula'.")
-  }else if(class(rename.headline) == "list" && !all(lapply(rename.headline, function(x) length(x[[2]])) %in% 1)){
+  }else if(inherits(rename.headline, "list") && !all(lapply(rename.headline, function(x) length(x[[2]])) %in% 1)){
     warning("Only one name can be specified before the change.")
-  }else if(class(rename.headline) == "list" && !all(lapply(rename.headline, function(x) length(x[[3]])) %in% 1)){
+  }else if(inherits(rename.headline, "list") && !all(lapply(rename.headline, function(x) length(x[[3]])) %in% 1)){
     warning("Only one name can be specified after the change.")
   }else if(!all(names(x[["ContTable"]]) == names(x[["CatTable"]]))){
     warning("The table object may have already been changed in an inconsistent way and cannot be adjusted by this function.")
   }else{
-    before.headline.name <- if(class(rename.headline) != "list"){
+    before.headline.name <- if(!inherits(rename.headline, "list")){
       as.character(rename.headline[[2]])
     }else{
       sapply(rename.headline, function(x){
@@ -65,7 +65,7 @@ tableone.rename.headline <- function(x, rename.headline){
       })
     }
 
-    after.headline.name <- if(class(rename.headline) != "list"){
+    after.headline.name <- if(!inherits(rename.headline, "list")){
       as.character(rename.headline[[3]])
     }else{
       sapply(rename.headline, function(x){
