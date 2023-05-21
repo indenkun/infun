@@ -54,6 +54,10 @@
 #' @export
 
 hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
+  if(!inherits(model, "glm"))
+    stop("model must be an object of glm class.")
+  if(stats::family(model)$family != "binomial" || stats::family(model)$link != "logit")
+    stop("model must be link logit and family binomial.")
 
   df <- g - 2
   out <- cbind.data.frame(y = model$y,
