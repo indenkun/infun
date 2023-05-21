@@ -150,14 +150,14 @@ vec_g <- function(x, g){
 
         }
 
-        ans_pre_var <- var(ans_pre)
-        ans_pos_var <- var(ans_pos)
+        ans_pre_var <- stats::var(ans_pre)
+        ans_pos_var <- stats::var(ans_pos)
 
         if(ans_pre_var < ans_pos_var || is.na(ans_pos_var)) ans <- ans_pre
         else ans_ <- ans_pos
       }
     })
-    ans <- unlist(unname(ans_list[which.min(lapply(ans_list, var))]))
+    ans <- unlist(unname(ans_list[which.min(lapply(ans_list, stats::var))]))
     ans_len <- length(ans)
   }
   ans
@@ -184,7 +184,7 @@ vec_n <- function(x, g){
     ans <- unique(purrr::list_flatten(ans))
   }
 
-  ans_n <- sapply(ans, var)
+  ans_n <- sapply(ans, stats::var)
   if(length(ans_n) == 1) ans <- unlist(ans[ans_n])
   else if(length(min(ans_n)) == 1) ans <- unlist(ans[which.min(ans_n)])
   else{
