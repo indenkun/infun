@@ -189,7 +189,7 @@ vec_n <- function(x, g){
   }
 
   ans_n <- sapply(ans, stats::var)
-  if(length(ans_n) == 1) ans <- unlist(ans[ans_n])
+  if(length(ans_n) == 1) ans <- unlist(ans)
   else if(length(min(ans_n)) == 1) ans <- unlist(ans[which.min(ans_n)])
   else{
     ans <- ans[ans_n == min(ans_n)]
