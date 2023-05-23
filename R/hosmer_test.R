@@ -58,6 +58,8 @@ hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
     stop("model must be an object of glm class.")
   if(stats::family(model)$family != "binomial" || stats::family(model)$link != "logit")
     stop("model must be link logit and family binomial.")
+  if (g < 2L)
+    stop("subgroups must be at least 2.")
 
   df <- g - 2
   out <- cbind.data.frame(y = model$y,
@@ -68,9 +70,9 @@ hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
     subgroup_step <- round(seq(step_by, nrow(out), step_by))
     n_step <- c(subgroup_step[1], subgroup_step[-1] - subgroup_step[1:(length(subgroup_step) - 1)])
     out$subgroup <- unlist(mapply(function(x, y) rep(x, y),
-                             1:length(n_step),
-                             n_step,
-                             SIMPLIFY = FALSE))
+                                  1:length(n_step),
+                                  n_step,
+                                  SIMPLIFY = FALSE))
   }else{
     fitted.values_uni <- unique(out$fitted.values)
     fitted.values_uni_len <- length(fitted.values_uni)
@@ -79,9 +81,9 @@ hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
     else if(fitted.values_uni_len == g){
       fitted.values_uni_n <- sapply(fitted.values_uni, function(x) sum(out$fitted.values == x))
       out$subgroup <- unlist(mapply(function(x, y) rep(x, y),
-                               fitted.values_uni,
-                               fitted.values_uni_n,
-                               SIMPLIFY = FALSE))
+                                    fitted.values_uni,
+                                    fitted.values_uni_n,
+                                    SIMPLIFY = FALSE))
       if(length(unique(round(out$subgroup, 3))) == length(unique(out$subgroup))) out$subgroup <- round(out$subgroup, 3)
     }else{
       fitted.values_uni_n <- sapply(fitted.values_uni, function(x) sum(out$fitted.values == x))
@@ -90,9 +92,9 @@ hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
       else n_step <- vec_g(fitted.values_uni_n, g = g)
 
       out$subgroup <- unlist(mapply(function(x, y) rep(x, y),
-                               1:length(n_step),
-                               n_step,
-                               SIMPLIFY = FALSE))
+                                    1:length(n_step),
+                                    n_step,
+                                    SIMPLIFY = FALSE))
 
       subgroup_names <- sapply(1:length(n_step), function(x){
         subgroup_vec <- out$fitted.values[out$subgroup == x]
