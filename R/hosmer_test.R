@@ -110,7 +110,7 @@ hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
   obs <- stats::xtabs(cbind(y0_obs = 1 - y, y1_obs = y) ~ subgroup, data = out)
   expect <- stats::xtabs(cbind(y0_expect = 1 - fitted.values, y1_expect = fitted.values) ~ subgroup, data = out)
   chisq <- sum((obs - expect)^2 / expect)
-  p.value <- 1 - stats::pchisq(chisq, df)
+  p.value <- stats::pchisq(chisq, df, lower.tail = FALSE)
 
   names(chisq) <- "X-squared"
   names(df) <- "df"

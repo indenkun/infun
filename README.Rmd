@@ -548,8 +548,9 @@ df <- data.frame(Class = rep(df$Class, df$Freq),
                  Age = rep(df$Age, df$Freq),
                  Survived = rep(df$Survived, df$Freq))
 model <- glm(Survived ~ . ,data = df, family = binomial())
-hosmer_test(model, simple = TRUE)
-hosmer_test(model, simple = FALSE)
+HL <- hosmer_test(model)
+HL
+cbind(HL$observed, HL$expected)
 ```
 
 

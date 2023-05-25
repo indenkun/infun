@@ -962,18 +962,25 @@ df <- data.frame(Class = rep(df$Class, df$Freq),
                  Age = rep(df$Age, df$Freq),
                  Survived = rep(df$Survived, df$Freq))
 model <- glm(Survived ~ . ,data = df, family = binomial())
-hosmer_test(model, simple = TRUE)
-#> 
-#>  Hosmer and Lemeshow goodness of fit test
-#> 
-#> data:  glm(formula = Survived ~ ., family = binomial(), data = df)
-#> X-squared = 691.53, df = 8, p-value < 2.2e-16
-hosmer_test(model, simple = FALSE)
+HL <- hosmer_test(model)
+HL
 #> 
 #>  Hosmer and Lemeshow goodness of fit test
 #> 
 #> data:  glm(formula = Survived ~ ., family = binomial(), data = df)
 #> X-squared = 82.909, df = 8, p-value = 1.266e-14
+cbind(HL$observed, HL$expected)
+#>               y0_obs y1_obs  y0_expect y1_expect
+#> 0.104            387     75 413.970751  48.02925
+#> 0.199            154     14 134.615153  33.38485
+#> 0.225            670    192 667.619238 194.38076
+#> 0.251             35     13  35.944389  12.05561
+#> 0.407            118     57 103.768314  71.23169
+#> 0.418 - 0.566     89     87  77.995475  98.00452
+#> 0.665 - 0.736     13     85  26.219038  71.78096
+#> 0.766              3     20   5.380762  17.61924
+#> 0.79              17     14   6.496165  24.50383
+#> 0.885 - 0.957      4    154  17.990715 140.00929
 ```
 
 ## Imports packages
