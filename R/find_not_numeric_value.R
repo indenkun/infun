@@ -11,7 +11,7 @@
 find.not.numeric.value <- function(x, where = c("number", "logical")){
   where <- match.arg(where)
 
-  if(!is.vector(x) && !is.data.frame(x)){
+  if(!is.atomic(x) && !is.data.frame(x)){
     warning("only vectors or data frame can be handled.")
     return(NA)
   }

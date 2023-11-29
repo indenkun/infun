@@ -18,7 +18,7 @@ find.not.as_date.value <- function(x, where = c("number", "logical")){
 
   if(!requireNamespace("lubridate", quietly = TRUE)) stop("This function will not work unless the `{lubridate}` package is installed")
 
-  if(!is.vector(x) && !is.data.frame(x)){
+  if(!is.atomic(x) && !is.data.frame(x)){
     warning("only vectors or data frame can be handled.")
     return(NA)
   }
@@ -46,7 +46,7 @@ find.not.as.Date.value <- function(x, where = c("number", "logical")){
 
   if(!requireNamespace("lubridate", quietly = TRUE)) stop("This function will not work unless the `{lubridate}` package is installed")
 
-  if(!is.vector(x) && !is.data.frame(x)){
+  if(!is.atomic(x) && !is.data.frame(x)){
     warning("only vectors or data frame can be handled.")
     return(NA)
   }

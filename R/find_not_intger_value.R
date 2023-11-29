@@ -12,13 +12,13 @@
 find.not.integer.value <- function(x, where = c("number", "logical")){
   where <- match.arg(where)
 
-  if(!is.vector(x) && !is.data.frame(x)){
+  if(!is.atomic(x) && !is.data.frame(x)){
     warning("only vectors or data frame can be handled.")
     return(NA)
   }
 
   if(all(!(find.not.numeric.value(x, "logical")))){
-    x <- if(is.vector(x)){
+    x <- if(is.atomic(x)){
       as.numeric(x)
     }else{
       purrr::map_df(x, as.numeric)
