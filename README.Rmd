@@ -553,6 +553,17 @@ HL
 cbind(HL$observed, HL$expected)
 ```
 
+### `readme()`
+
+Access The Package README in a Browser. With the package installed, access the README of the installed package from CRAN or GitHub with a browser.
+
+If the package was installed from CRAN, it accesses the CRAN package web page with the README; if there is no README, an empty web page is displayed.
+
+If the package was installed from GitHub, the web page of package on the GitHubis accessed.
+
+```r
+readme("infun")
+```
 
 ## Imports packages
 

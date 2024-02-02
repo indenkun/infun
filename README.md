@@ -968,7 +968,7 @@ HL
 #>  Hosmer and Lemeshow goodness of fit test
 #> 
 #> data:  glm(formula = Survived ~ ., family = binomial(), data = df)
-#> X-squared = 82.909, df = 8, p-value = 1.266e-14
+#> X-squared = 82.909, df = 8, p-value = 1.268e-14
 cbind(HL$observed, HL$expected)
 #>               y0_obs y1_obs  y0_expect y1_expect
 #> 0.104            387     75 413.970751  48.02925
@@ -981,6 +981,23 @@ cbind(HL$observed, HL$expected)
 #> 0.766              3     20   5.380762  17.61924
 #> 0.79              17     14   6.496165  24.50383
 #> 0.885 - 0.957      4    154  17.990715 140.00929
+```
+
+### `readme()`
+
+Access The Package README in a Browser. With the package installed,
+access the README of the installed package from CRAN or GitHub with a
+browser.
+
+If the package was installed from CRAN, it accesses the CRAN package web
+page with the README; if there is no README, an empty web page is
+displayed.
+
+If the package was installed from GitHub, the web page of package on the
+GitHubis accessed.
+
+``` r
+readme("infun")
 ```
 
 ## Imports packages
