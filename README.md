@@ -18,7 +18,7 @@ install the development version install from GitHub:
 
 ``` r
 install.packages("remotes")
-remotes::install_github("indenkun/infun")
+remotes::install_github("indenkun/infun", build_vignettes = TRUE)
 ```
 
 ## Example
@@ -1012,6 +1012,8 @@ readme("infun")
 - `{tools}`
 - `{lubridate}`
 - `{dplyr}`
+- `{knitr}`
+- \`{rmarkdown}
 
 ## License
 

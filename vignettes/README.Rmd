@@ -1,15 +1,16 @@
 ---
-output: github_document
+title: "README"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{README}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
+  comment = "#>"
 )
 ```
 
@@ -35,7 +36,7 @@ remotes::install_github("indenkun/infun", build_vignettes = TRUE)
 
 load library.
 
-```{r example}
+```{r setup}
 library(infun)
 ```
 
