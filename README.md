@@ -1013,7 +1013,7 @@ readme("infun")
 - `{lubridate}`
 - `{dplyr}`
 - `{knitr}`
-- \`{rmarkdown}
+- `{rmarkdown}`
 
 ## License
 
