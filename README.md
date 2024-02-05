@@ -1004,6 +1004,7 @@ readme("infun")
 
 - `{purrr}`
 - `{stats}`
+- `{utils}`
 
 ## Suggests packages
 
