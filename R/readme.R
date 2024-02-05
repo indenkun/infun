@@ -15,13 +15,13 @@
 readme <- function(package){
   if(length(package) != 1) stop("Only one package name can be specified.")
   if(!is.character(package)) stop("The package name must be specified as a string.")
-  repository_info <- packageDescription(package)[c("Repository", "GithubRepo", "GithubUsername")]
+  repository_info <- utils::packageDescription(package)[c("Repository", "GithubRepo", "GithubUsername")]
   if(!is.null(repository_info$Repository) && repository_info$Repository == "CRAN")
-    browseURL(paste0("https://cran.r-project.org/web/packages/",
+    utils::browseURL(paste0("https://cran.r-project.org/web/packages/",
                      package,
                      "/readme/README.html"))
   else if(!is.null(repository_info$GithubRepo))
-    browseURL(paste0("https://github.com/",
+    utils::browseURL(paste0("https://github.com/",
                      repository_info$GithubUsername,
                      "/",
                      repository_info$GithubRepo))
