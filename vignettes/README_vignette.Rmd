@@ -11,8 +11,10 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>")
-dir.create("./man/figures/", recursive = TRUE)
-file.copy("../man/figures/", "./man/", recursive = TRUE)
+if(!dir.exists("./man/figures/")){
+  dir.create("./man/figures/", recursive = TRUE)
+  file.copy("../man/figures/", "./man/", recursive = TRUE)
+}
 ```
 
 ```{r child = '../README.md'}
