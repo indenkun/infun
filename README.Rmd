@@ -565,6 +565,33 @@ If the package was installed from GitHub, the web page of package on the GitHubi
 readme("infun")
 ```
 
+### `to_times()`
+
+Create a `times` object in the `{chron}` package by taking only the elements of time from a `POSIXlt` or `POSIXct` object or `chron` object in `{chron}` package.
+
+```{r}
+x <- as.POSIXlt("2024/12/13 12:00:00")
+x
+to_times(x)
+library(chron)
+x <- as.chron(x)
+x
+to_times(x)
+```
+
+If the `POSIXct` object differs from the system time zone, the time zone must also be specified within `to_times()`.
+
+```{r}
+Sys.timezone()
+x <- as.POSIXct("2024/12/13 12:00:00", tz = "America/New_York")
+x
+# incorrect
+to_times(x)
+# correct
+to_times(x, tz = "America/New_York")
+```
+
+
 ## Imports packages
 
 * `{purrr}`

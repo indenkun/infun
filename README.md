@@ -1000,6 +1000,43 @@ GitHubis accessed.
 readme("infun")
 ```
 
+### `to_times()`
+
+Create a `times` object in the `{chron}` package by taking only the
+elements of time from a `POSIXlt` or `POSIXct` object or `chron` object
+in `{chron}` package.
+
+``` r
+x <- as.POSIXlt("2024/12/13 12:00:00")
+x
+#> [1] "2024-12-13 12:00:00 JST"
+to_times(x)
+#> [1] 12:00:00
+library(chron)
+x <- as.chron(x)
+x
+#> [1] (12/13/24 12:00:00)
+to_times(x)
+#> [1] 12:00:00
+```
+
+If the `POSIXct` object differs from the system time zone, the time zone
+must also be specified within `to_times()`.
+
+``` r
+Sys.timezone()
+#> [1] "Asia/Tokyo"
+x <- as.POSIXct("2024/12/13 12:00:00", tz = "America/New_York")
+x
+#> [1] "2024-12-13 12:00:00 EST"
+# incorrect
+to_times(x)
+#> [1] 02:00:00
+# correct
+to_times(x, tz = "America/New_York")
+#> [1] 12:00:00
+```
+
 ## Imports packages
 
 - `{purrr}`
