@@ -968,7 +968,7 @@ HL
 #>  Hosmer and Lemeshow goodness of fit test
 #> 
 #> data:  glm(formula = Survived ~ ., family = binomial(), data = df)
-#> X-squared = 82.909, df = 8, p-value = 1.266e-14
+#> X-squared = 82.909, df = 8, p-value = 1.268e-14
 cbind(HL$observed, HL$expected)
 #>               y0_obs y1_obs  y0_expect y1_expect
 #> 0.104            387     75 413.970751  48.02925
@@ -983,10 +983,41 @@ cbind(HL$observed, HL$expected)
 #> 0.885 - 0.957      4    154  17.990715 140.00929
 ```
 
+### `head_tail()`
+
+Only display the specified number of rows and columns of the data frame
+are extracted, otherwise “…” and abbreviations are used to denote the
+rest. If the specified number of rows and columns is greater than the
+original data frame, the data is display as it is.
+
+``` r
+head_tail(mtcars, n = 3L, col_n = 3L)
+#>                mpg cyl disp ...  am gear carb
+#> Mazda RX4       21   6  160 ...   1    4    4
+#> Mazda RX4 Wag   21   6  160 ...   1    4    4
+#> Datsun 710    22.8   4  108 ...   1    4    1
+#> ...            ... ...  ... ... ...  ...  ...
+#> Ferrari Dino  19.7   6  145 ...   1    5    6
+#> Maserati Bora   15   8  301 ...   1    5    8
+#> Volvo 142E    21.4   4  121 ...   1    4    2
+knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
+```
+
+|               |  mpg | cyl | disp |   … |  am | gear | carb |
+|:--------------|-----:|----:|-----:|----:|----:|-----:|-----:|
+| Mazda RX4     |   21 |   6 |  160 |   … |   1 |    4 |    4 |
+| Mazda RX4 Wag |   21 |   6 |  160 |   … |   1 |    4 |    4 |
+| Datsun 710    | 22.8 |   4 |  108 |   … |   1 |    4 |    1 |
+| …             |    … |   … |    … |   … |   … |    … |    … |
+| Ferrari Dino  | 19.7 |   6 |  145 |   … |   1 |    5 |    6 |
+| Maserati Bora |   15 |   8 |  301 |   … |   1 |    5 |    8 |
+| Volvo 142E    | 21.4 |   4 |  121 |   … |   1 |    4 |    2 |
+
 ## Imports packages
 
 - `{purrr}`
 - `{stats}`
+- `{utils}`
 
 ## Suggests packages
 

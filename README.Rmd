@@ -1,5 +1,5 @@
 ---
-output: github_document
+output: github_document 
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -553,11 +553,20 @@ HL
 cbind(HL$observed, HL$expected)
 ```
 
+### `head_tail()`
+
+Only display the specified number of rows and columns of the data frame are extracted, otherwise "..." and abbreviations are used to denote the rest. If the specified number of rows and columns is greater than the original data frame, the data is display as it is.
+
+```{r}
+head_tail(mtcars, n = 3L, col_n = 3L)
+knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
+```
 
 ## Imports packages
 
 * `{purrr}`
 * `{stats}`
+* `{utils}`
 
 ## Suggests packages
 
