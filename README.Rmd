@@ -28,7 +28,7 @@ install the development version install from GitHub:
 
 ```r
 install.packages("remotes")
-remotes::install_github("indenkun/infun")
+remotes::install_github("indenkun/infun", build_vignettes = TRUE)
 ```
 
 ## Example
@@ -553,6 +553,44 @@ HL
 cbind(HL$observed, HL$expected)
 ```
 
+### `readme()`
+
+Access The Package README in a Browser. With the package installed, access the README of the installed package from CRAN or GitHub with a browser.
+
+If the package was installed from CRAN, it accesses the CRAN package web page with the README; if there is no README, an empty web page is displayed.
+
+If the package was installed from GitHub, the web page of package on the GitHubis accessed.
+
+```r
+readme("infun")
+```
+
+### `to_times()`
+
+Create a `times` object in the `{chron}` package by taking only the elements of time from a `POSIXlt` or `POSIXct` object or `chron` object in `{chron}` package.
+
+```{r}
+x <- as.POSIXlt("2024/12/13 12:00:00")
+x
+to_times(x)
+library(chron)
+x <- as.chron(x)
+x
+to_times(x)
+```
+
+If the `POSIXct` object differs from the system time zone, the time zone must also be specified within `to_times()`.
+
+```{r}
+Sys.timezone()
+x <- as.POSIXct("2024/12/13 12:00:00", tz = "America/New_York")
+x
+# incorrect
+to_times(x)
+# correct
+to_times(x, tz = "America/New_York")
+```
+
 ### `head_tail()`
 
 Only display the specified number of rows and columns of the data frame are extracted, otherwise "..." and abbreviations are used to denote the rest. If the specified number of rows and columns is greater than the original data frame, the data is display as it is.
@@ -575,6 +613,8 @@ knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
 * `{tools}`
 * `{lubridate}`
 * `{dplyr}`
+* `{knitr}`
+* `{rmarkdown}`
 
 ## License
 

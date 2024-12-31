@@ -17,4 +17,8 @@ Suggests:
     tools,
     gtsummary,
     lubridate,
-    dplyr
+    dplyr,
+    knitr,
+    rmarkdown,
+    chron
+VignetteBuilder: knitr

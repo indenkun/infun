@@ -1,0 +1,21 @@
+---
+title: "README"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{README}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>")
+if(!dir.exists("./man/figures/")){
+  dir.create("./man/figures/", recursive = TRUE)
+  file.copy("../man/figures/", "./man/", recursive = TRUE)
+}
+```
+
+```{r child = '../README.md'}
+```

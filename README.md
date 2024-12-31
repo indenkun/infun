@@ -18,7 +18,7 @@ install the development version install from GitHub:
 
 ``` r
 install.packages("remotes")
-remotes::install_github("indenkun/infun")
+remotes::install_github("indenkun/infun", build_vignettes = TRUE)
 ```
 
 ## Example
@@ -983,6 +983,60 @@ cbind(HL$observed, HL$expected)
 #> 0.885 - 0.957      4    154  17.990715 140.00929
 ```
 
+### `readme()`
+
+Access The Package README in a Browser. With the package installed,
+access the README of the installed package from CRAN or GitHub with a
+browser.
+
+If the package was installed from CRAN, it accesses the CRAN package web
+page with the README; if there is no README, an empty web page is
+displayed.
+
+If the package was installed from GitHub, the web page of package on the
+GitHubis accessed.
+
+``` r
+readme("infun")
+```
+
+### `to_times()`
+
+Create a `times` object in the `{chron}` package by taking only the
+elements of time from a `POSIXlt` or `POSIXct` object or `chron` object
+in `{chron}` package.
+
+``` r
+x <- as.POSIXlt("2024/12/13 12:00:00")
+x
+#> [1] "2024-12-13 12:00:00 JST"
+to_times(x)
+#> [1] 12:00:00
+library(chron)
+x <- as.chron(x)
+x
+#> [1] (12/13/24 12:00:00)
+to_times(x)
+#> [1] 12:00:00
+```
+
+If the `POSIXct` object differs from the system time zone, the time zone
+must also be specified within `to_times()`.
+
+``` r
+Sys.timezone()
+#> [1] "Asia/Tokyo"
+x <- as.POSIXct("2024/12/13 12:00:00", tz = "America/New_York")
+x
+#> [1] "2024-12-13 12:00:00 EST"
+# incorrect
+to_times(x)
+#> [1] 02:00:00
+# correct
+to_times(x, tz = "America/New_York")
+#> [1] 12:00:00
+```
+
 ### `head_tail()`
 
 Only display the specified number of rows and columns of the data frame
@@ -1026,6 +1080,8 @@ knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
 - `{tools}`
 - `{lubridate}`
 - `{dplyr}`
+- `{knitr}`
+- `{rmarkdown}`
 
 ## License
 
