@@ -18,6 +18,9 @@ to_times(x, tz = "")
 \description{
 Create a \code{times} object in the \code{chron} package by taking only the elements of time from a \code{POSIXlt} or \code{POSIXct} object or \code{chron} object in \code{chron} package.
 }
+\details{
+If the \code{POSIXct} object differs from the system time zone, the time zone must also be specified within \code{to_times}.
+}
 \examples{
 x <- as.POSIXlt(Sys.time())
 to_times(x)

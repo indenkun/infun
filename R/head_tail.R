@@ -23,6 +23,7 @@ head_tail <- function(data, n = 3L, col_n = 3L){
   data_col <- ncol(data)
 
   if(n * 2 <=  data_row){
+    data <- as.data.frame(lapply(data, as.character), row.names = row.names(data))
     data <- rbind.data.frame(utils::head(data, n = n),
                              as.data.frame(matrix("...", ncol = data_col,
                                                   dimnames = list("...", colnames(data)))),
