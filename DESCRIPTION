@@ -20,5 +20,6 @@ Suggests:
     dplyr,
     knitr,
     rmarkdown,
-    chron
+    chron,
+    mvnmle
 VignetteBuilder: knitr
