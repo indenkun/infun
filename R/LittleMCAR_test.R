@@ -116,6 +116,7 @@ LittleMCAR_test <- function(data, max_iterlim = 10000){
   names(d2) <- "X-squared"
   names(df) <- "df"
   rval <- list(method = "Little's missing completely at random (MCAR) test",
+               alternative = "the data is not Missing Completely at Random (MCAR)",
                statistic = d2,
                parameter = df,
                data.name = dname,

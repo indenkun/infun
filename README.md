@@ -954,6 +954,8 @@ number of samples as possible.**
 The division of subgroups when simple is TRUE and when FALSE is
 different. See Detail in the documentation for details.
 
+The result is in `“htest”` class list format.
+
 ``` r
 data("Titanic")
 df <- data.frame(Titanic)
@@ -969,6 +971,7 @@ HL
 #> 
 #> data:  glm(formula = Survived ~ ., family = binomial(), data = df)
 #> X-squared = 82.909, df = 8, p-value = 1.268e-14
+#> alternative hypothesis: the observed and expected proportions are not the same
 cbind(HL$observed, HL$expected)
 #>               y0_obs y1_obs  y0_expect y1_expect
 #> 0.104            387     75 413.970751  48.02925
@@ -1161,6 +1164,8 @@ The upper limit of the number of calculations can be set with
 `max_iterlim`. If the solution has not converged beyond the upper limit,
 `stop.code` will be `4`, so increase `max_iterlim` and recalculate.
 
+The result is in `“htest”` class list format.
+
 ``` r
 LittleMCAR_test(airquality)
 #> 
@@ -1168,6 +1173,7 @@ LittleMCAR_test(airquality)
 #> 
 #> data:  airquality
 #> X-squared = 35.125, df = 14, p-value = 0.001409
+#> alternative hypothesis: the data is not Missing Completely at Random (MCAR)
 # stop.code is 1 or 2 because the solution of maximum likelihood estimates is convergent.
 # The stop.code follows the description of nlm().
 LittleMCAR_test(airquality)$stop.code

@@ -116,6 +116,7 @@ hosmer_test <- function(model, g = 10, simple = FALSE, force = FALSE){
   names(df) <- "df"
 
   HL <- list(method = "Hosmer and Lemeshow goodness of fit test",
+             alternative = "the observed and expected proportions are not the same",
              parameter = df,
              p.value = p.value,
              statistic = chisq,

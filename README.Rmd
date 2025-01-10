@@ -540,6 +540,8 @@ However, there are several variations on how to divide the subgroups, and **this
 
 The division of subgroups when simple is TRUE and when FALSE is different. See Detail in the documentation for details.
 
+The result is in `“htest”` class list format.
+
 ```{r}
 data("Titanic")
 df <- data.frame(Titanic)
@@ -621,6 +623,8 @@ The `LittleMCAR_test()` function internally uses the `mlest2()` function to perf
 Therefore, `LittleMCAR_test()` performs Little's MCAR test using `mlest2()` internally, whose solution converges.
 
 The upper limit of the number of calculations can be set with `max_iterlim`. If the solution has not converged beyond the upper limit, `stop.code` will be `4`, so increase `max_iterlim` and recalculate.
+
+The result is in `“htest”` class list format.
 
 ```{r}
 LittleMCAR_test(airquality)
