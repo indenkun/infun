@@ -600,6 +600,35 @@ head_tail(mtcars, n = 3L, col_n = 3L)
 knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
 ```
 
+### `mlest2()`
+
+Function to compute maximum likelihood estimates of the mean vector and covariance matrix based on the `mlest()` function in the `{mvnmle}` package.
+
+The `mlest()` function in the `{mvnmle}` package is computed internally using the `nlm()` function, but the solution may not converge if the appropriate number of computations is not specified.If the solution does not converge, this function sets the specified `max_iterlim` as the upper limit and recalculates the solution while increasing the number of calculations.
+
+```{r}
+# Solution does not converge and stop.code becomes 4
+mvnmle::mlest(airquality)
+# stop.code is 1 or 2 because the solution of maximum likelihood estimates is convergent.
+# The stop.code follows the description of nlm().
+mlest2(airquality)
+```
+
+### `LittleMCAR_test()`
+
+The `LittleMCAR_test()` function internally uses the `mlest2()` function to perform the MCAR test for Little, and the `{BaylorEdPsych}` removed from CRAN has a function that uses the `mlest()` function from the `{mvnmle}` package to Little's MCAR test, but as described in the description of `mlest2()`, the `mlest()` function in the `{mvnmle}` package may exit without converging solutions in its default behavior, and correct statistics may not be calculated.
+
+Therefore, `LittleMCAR_test()` performs Little's MCAR test using `mlest2()` internally, whose solution converges.
+
+The upper limit of the number of calculations can be set with `max_iterlim`. If the solution has not converged beyond the upper limit, `stop.code` will be `4`, so increase `max_iterlim` and recalculate.
+
+```{r}
+LittleMCAR_test(airquality)
+# stop.code is 1 or 2 because the solution of maximum likelihood estimates is convergent.
+# The stop.code follows the description of nlm().
+LittleMCAR_test(airquality)$stop.code
+```
+
 ## Imports packages
 
 * `{purrr}`
@@ -615,6 +644,8 @@ knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
 * `{dplyr}`
 * `{knitr}`
 * `{rmarkdown}`
+* `{chron}`
+* `{mvnmle}`
 
 ## License
 

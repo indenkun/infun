@@ -1067,6 +1067,113 @@ knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
 | Maserati Bora |   15 |   8 |  301 |   … |   1 |    5 |    8 |
 | Volvo 142E    | 21.4 |   4 |  121 |   … |   1 |    4 |    2 |
 
+### `mlest2()`
+
+Function to compute maximum likelihood estimates of the mean vector and
+covariance matrix based on the `mlest()` function in the `{mvnmle}`
+package.
+
+The `mlest()` function in the `{mvnmle}` package is computed internally
+using the `nlm()` function, but the solution may not converge if the
+appropriate number of computations is not specified.If the solution does
+not converge, this function sets the specified `max_iterlim` as the
+upper limit and recalculates the solution while increasing the number of
+calculations.
+
+``` r
+# Solution does not converge and stop.code becomes 4
+mvnmle::mlest(airquality)
+#> $muhat
+#> [1]  42.137122 185.930478   9.979429  77.870026   6.997107  15.801146
+#> 
+#> $sigmahat
+#>             [,1]        [,2]        [,3]       [,4]       [,5]         [,6]
+#> [1,] 1043.775244  898.167818 -65.2797601 209.522568  7.4784936   -6.8827303
+#> [2,]  898.167818 8052.767921 -17.0826415 232.911521 -7.3346079 -119.5059161
+#> [3,]  -65.279760  -17.082642  12.3310952 -15.161567 -0.8830718    0.8089605
+#> [4,]  209.522568  232.911521 -15.1615666  89.016506  5.6073406  -10.8861392
+#> [5,]    7.478494   -7.334608  -0.8830718   5.607341  1.9932380   -0.1025930
+#> [6,]   -6.882730 -119.505916   0.8089605 -10.886139 -0.1025930   78.0684606
+#> 
+#> $value
+#> [1] 4641.691
+#> 
+#> $gradient
+#>  [1] -0.162110846  0.026193351  0.070277981  0.251914764  0.590373543
+#>  [6]  0.050083508 -0.050570087 -0.077972832  0.018642508 -0.040981608
+#> [11]  0.036405254 -0.023916020 -0.003028617 -0.006754817  0.007480594
+#> [16] -0.048362381 -0.007390554 -0.569748408  0.001690751 -0.001397893
+#> [21]  0.068044756 -0.012748387  0.079980964 -0.009245923  1.123617039
+#> [26]  0.014007128  0.115004696
+#> 
+#> $stop.code
+#> [1] 4
+#> 
+#> $iterations
+#> [1] 100
+# stop.code is 1 or 2 because the solution of maximum likelihood estimates is convergent.
+# The stop.code follows the description of nlm().
+mlest2(airquality)
+#> $muhat
+#> [1]  42.167735 185.925880   9.980417  77.817784   6.989324  15.791587
+#> 
+#> $sigmahat
+#>             [,1]        [,2]        [,3]       [,4]        [,5]          [,6]
+#> [1,] 1043.974038  898.260477 -65.2747161 209.560884  7.46080083   -6.81740765
+#> [2,]  898.260477 8047.751768 -17.1140591 232.865521 -7.32823118 -119.43119303
+#> [3,]  -65.274716  -17.114059  12.3341300 -15.178082 -0.88421914    0.84345568
+#> [4,]  209.560884  232.865521 -15.1780822  89.026437  5.60815578  -10.88566059
+#> [5,]    7.460801   -7.328231  -0.8842191   5.608156  1.99352218   -0.09948125
+#> [6,]   -6.817408 -119.431193   0.8434557 -10.885661 -0.09948125   78.08865290
+#> 
+#> $value
+#> [1] 4641.679
+#> 
+#> $gradient
+#>  [1] -1.009919e-01  2.628238e-02  3.930712e-03 -5.460882e-02 -5.338171e-03
+#>  [6] -2.463106e-02 -8.982798e-02  1.252469e-01 -8.040599e-02 -2.129308e-02
+#> [11] -1.394983e-02 -9.495462e-02 -1.585249e-03 -2.612069e-03  1.191438e-04
+#> [16]  8.576535e-04  1.346052e-04  2.525667e-03 -3.665264e-04 -3.274181e-05
+#> [21] -1.960871e-03  9.886207e-04  1.497938e-03 -1.664375e-04  5.700713e-03
+#> [26] -3.325113e-03  4.720278e-04
+#> 
+#> $stop.code
+#> [1] 2
+#> 
+#> $iterations
+#> [1] 154
+```
+
+### `LittleMCAR_test()`
+
+The `LittleMCAR_test()` function internally uses the `mlest2()` function
+to perform the MCAR test for Little, and the `{BaylorEdPsych}` removed
+from CRAN has a function that uses the `mlest()` function from the
+`{mvnmle}` package to Little’s MCAR test, but as described in the
+description of `mlest2()`, the `mlest()` function in the `{mvnmle}`
+package may exit without converging solutions in its default behavior,
+and correct statistics may not be calculated.
+
+Therefore, `LittleMCAR_test()` performs Little’s MCAR test using
+`mlest2()` internally, whose solution converges.
+
+The upper limit of the number of calculations can be set with
+`max_iterlim`. If the solution has not converged beyond the upper limit,
+`stop.code` will be `4`, so increase `max_iterlim` and recalculate.
+
+``` r
+LittleMCAR_test(airquality)
+#> 
+#>  Little's missing completely at random (MCAR) test
+#> 
+#> data:  airquality
+#> X-squared = 35.125, df = 14, p-value = 0.001409
+# stop.code is 1 or 2 because the solution of maximum likelihood estimates is convergent.
+# The stop.code follows the description of nlm().
+LittleMCAR_test(airquality)$stop.code
+#> [1] 2
+```
+
 ## Imports packages
 
 - `{purrr}`
@@ -1082,6 +1189,8 @@ knitr::kable(head_tail(mtcars, n = 3L, col_n = 3L), align = "r")
 - `{dplyr}`
 - `{knitr}`
 - `{rmarkdown}`
+- `{chron}`
+- `{mvnmle}`
 
 ## License
 
