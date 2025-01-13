@@ -10,7 +10,7 @@
 #' @param max_iterlim Numeric. Upper limit of the number of iterations to avoid infinite loops.
 #' @seealso \code{\link[stats]{nlm}} \code{\link[mvnmle]{mlest}}
 #' @export
-mlest2 <- function(data, max_iterlim = 10000, ...){
+mlest2 <- function(data, max_iterlim = 1e+05, ...){
   if(!requireNamespace("mvnmle", quietly = TRUE)) stop("This function will not work unless the `{mvnmle}` package is installed")
   ans <- mvnmle::mlest(data = data, ...)
   iterlim <- ans$iterations

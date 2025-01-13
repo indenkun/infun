@@ -4,7 +4,7 @@
 \alias{mlest2}
 \title{ML Estimation of Multivariate Normal Data}
 \usage{
-mlest2(data, max_iterlim = 10000, ...)
+mlest2(data, max_iterlim = 1e+05, ...)
 }
 \arguments{
 \item{data}{A data frame or matrix containing multivariate normal
