@@ -4,13 +4,16 @@
 \alias{mlest2}
 \title{ML Estimation of Multivariate Normal Data}
 \usage{
-mlest2(data, max_iterlim = 1e+05, ...)
+mlest2(data, iterlim = 10000, max_iterlim = 1e+05, ...)
 }
 \arguments{
 \item{data}{A data frame or matrix containing multivariate normal
 data.  Each row should correspond to an observation, and each
 column to a component of the multivariate vector.  Missing values
 should be coded by 'NA'.}
+
+\item{iterlim}{a positive integer specifying the maximum number of
+    iterations to be performed before the program is terminated.}
 
 \item{max_iterlim}{Numeric. Upper limit of the number of iterations to avoid infinite loops.}
 

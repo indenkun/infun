@@ -4,12 +4,18 @@
 \alias{LittleMCAR_test}
 \title{Little's missing completely at random (MCAR) test}
 \usage{
-LittleMCAR_test(data, max_iterlim = 10000)
+LittleMCAR_test(data, ...)
 }
 \arguments{
 \item{data}{A data frame}
 
-\item{max_iterlim}{Numeric. Upper limit of the number of iterations to avoid infinite loops.}
+\item{...}{
+  Arguments passed on to \code{\link[=mlest2]{mlest2}}
+  \describe{
+    \item{\code{max_iterlim}}{Numeric. Upper limit of the number of iterations to avoid infinite loops.}
+    \item{\code{iterlim}}{a positive integer specifying the maximum number of
+    iterations to be performed before the program is terminated.}
+  }}
 }
 \value{
 A list with class \code{"htest"} containing the following components:

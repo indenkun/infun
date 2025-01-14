@@ -4,7 +4,7 @@
 #' In the \code{mlest()} function of the \code{mvnmle} package, the correct statistics could not be calculated because the solution of ML estimation may not converge with the default value.
 #' Using a modified version of the \code{mlest2()} function, an algorithm is used to perform ML estimation until the solution converges.
 #' @param data A data frame
-#' @inheritParams mlest2
+#' @inheritDotParams mlest2
 #'
 #' @returns
 #' A list with class \code{"htest"} containing the following components:
@@ -34,7 +34,7 @@
 #'
 #' @export
 
-LittleMCAR_test <- function(data, max_iterlim = 10000){
+LittleMCAR_test <- function(data, ...){
   if(!requireNamespace("mvnmle", quietly = TRUE)) stop("This function will not work unless the `{mvnmle}` package is installed")
 
   if (!(is.matrix(data) | is.data.frame(data)))
@@ -61,7 +61,7 @@ LittleMCAR_test <- function(data, max_iterlim = 10000){
   p <- n.mis.pat-1
 
   # Maximum likelihood estimation
-  ML_estimate <- suppressWarnings(mlest2(data = data, max_iterlim = max_iterlim))
+  ML_estimate <- suppressWarnings(mlest2(data = data, ...))
   # ML estimate of grand mean (assumes Normal dist)
   gmean <- ML_estimate$muhat
   # ML estimate of grand covariance (assumes Normal dist)
@@ -126,6 +126,11 @@ LittleMCAR_test <- function(data, max_iterlim = 10000){
                data = datasets,
                stop.code = ML_estimate$stop.code,
                iterations	= ML_estimate$iteration)
+
+  if(rval$stop.code == 4){
+    warning("The solution to maximum likelihood estimation of the multivariate normal distribution may not have converged.\n Adjust the values of arguments such as `iterlim` and so on.")
+  }
+
   class(rval) <- "htest"
 
   rval

@@ -7,12 +7,13 @@
 #' To avoid an infinite loop, the number of calculations is limited to \code{max_iterlim}.
 #' @inherit mvnmle::mlest return details references examples
 #' @inheritParams mvnmle::mlest
+#' @inheritParams stats::nlm
 #' @param max_iterlim Numeric. Upper limit of the number of iterations to avoid infinite loops.
 #' @seealso \code{\link[stats]{nlm}} \code{\link[mvnmle]{mlest}}
 #' @export
-mlest2 <- function(data, max_iterlim = 1e+05, ...){
+mlest2 <- function(data, iterlim = 1e+04, max_iterlim = 1e+05, ...){
   if(!requireNamespace("mvnmle", quietly = TRUE)) stop("This function will not work unless the `{mvnmle}` package is installed")
-  ans <- mvnmle::mlest(data = data, ...)
+  ans <- mvnmle::mlest(data = data, iterlim = iterlim, ...)
   iterlim <- ans$iterations
   while(ans$stop.code == 4 && iterlim < max_iterlim){
     iterlim <- iterlim * 10
