@@ -633,6 +633,27 @@ str_remove_sandwich("dplyr (≥ 0.8.3), arabic2kansuji (≥ 0.1.0)", "\\(", "\\)
 #> [1] "dplyr , arabic2kansuji "
 ```
 
+### `str_extract_sandwich()`
+
+Extracts strings sandwiched between specified strings.
+
+The specified string must be a single character, and the first and last
+characters of the string must be different.
+
+``` r
+str_extract_sandwich("西馬音内《にしもない》は雄勝郡羽後町《おがちぐんうごまち》です。", start_pattern = "《", end_pattern = "》")
+#> [[1]]
+#> [1] "にしもない"         "おがちぐんうごまち"
+```
+
+Please escape characters that need to be escaped, such as `()`.
+
+``` r
+str_extract_sandwich("dplyr (≥ 0.8.3), arabic2kansuji (≥ 0.1.0)", "\\(", "\\)")
+#> [[1]]
+#> [1] "≥ 0.8.3" "≥ 0.1.0"
+```
+
 ### `subset_interchange_col()`
 
 For any two columns specified in the data frame (say column A and B), if
@@ -789,14 +810,14 @@ scales::demo_discrete(touhoku)
 #> scale_x_discrete()
 ```
 
-<img src="man/figures/README-unnamed-chunk-25-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-27-1.png" width="100%" />
 
 ``` r
 scales::demo_discrete(touhoku, labels = label_vertical())
 #> scale_x_discrete(labels = label_vertical())
 ```
 
-<img src="man/figures/README-unnamed-chunk-25-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-27-2.png" width="100%" />
 
 The function to express line breaks when the text consists only of
 Japanese has been provided, but there is a possibility of misalignment
@@ -809,14 +830,14 @@ scales::demo_discrete(tiiki)
 #> scale_x_discrete()
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-28-1.png" width="100%" />
 
 ``` r
 scales::demo_discrete(tiiki, labels = label_vertical(line_feed = "\n"))
 #> scale_x_discrete(labels = label_vertical(line_feed = "\n"))
 ```
 
-<img src="man/figures/README-unnamed-chunk-26-2.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-28-2.png" width="100%" />
 
 ### `mode_()` and `mode_data.farme()`
 
