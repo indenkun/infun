@@ -24,19 +24,19 @@
 #' check_onevalue_cols(d)
 #' @rdname Handles_NA
 #' @export
-remove_na_cols <- function(data, cols, drop = FALSE){
+remove_na_rows <- function(data, cols, drop = FALSE){
   if(!is.data.frame(data)) stop("data must be a data frame.")
 
   if(!missing(cols)){
     if(!any(colnames(data) %in% cols)) stop("cols must be a column name in the data frame")
     data_check <- data[, cols, drop = FALSE]
   }else data_check <- data
-  data[apply(data_check, 1, function(x) !all(is.na(x))), drop = drop]
+  data[apply(data_check, 1, function(x) !all(is.na(x))), , drop = drop]
 }
 
 #' @rdname Handles_NA
 #' @export
-remove_na_rows <- function(data, cols){
+remove_na_cols <- function(data, cols){
   if(!is.data.frame(data)) stop("data must be a data frame.")
 
   if(!missing(cols)){
