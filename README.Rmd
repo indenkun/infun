@@ -649,6 +649,28 @@ LittleMCAR_test(airquality)
 LittleMCAR_test(airquality)$stop.code
 ```
 
+### Handles data frames containing NA in a nice way
+
+`remove_na_cols()` deletes a column that consists only of `NA`. `remove_na_rows()` deletes a rows that consists only of `NA`. `consolidate_cols()` retrieves a vector of values where each row of the specified data frame consists of NA and one other value, either with NA removed only or with `NA` if all values in the row are `NA`. `check_onevalue_cols()` is check funcion within `consolidate_cols()`.
+
+```{r}
+d <- data.frame(value01 = c(1:3, NA),
+                value02 = c(1:2, NA, NA),
+                value03 = rep(NA, 4),
+                value04 = c(1:3, NA),
+                value05 = rep(NA, 4))
+d
+remove_na_cols(d)
+remove_na_rows(d)
+d <- data.frame(id_1 = c(1:3, rep(NA, 6)),
+                id_2 = c(rep(NA, 3), 4:6, rep(NA, 3)),
+                id_3 = c(rep(NA, 6), 7:9))
+d
+consolidate_cols(d)
+check_onevalue_cols(d)
+```
+
+
 ## Imports packages
 
 * `{purrr}`
